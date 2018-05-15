@@ -4,40 +4,59 @@
  * and open the template in the editor.
  */
 package com.example.demo.Controller;
+
+
+import com.example.demo.model.entity.Equipo;
 import com.example.demo.model.entity.TipoEquipo;
+import com.example.demo.model.service.EquipoService;
 import com.example.demo.model.service.TipoEquipoService;
+import java.util.List;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
+
 
 /**
  *
  * @author Asus
  */
 @Controller
-@RequestMapping("/tipoEquipo")
-public class TipoEquipoController {
+@RequestMapping("/equipo")
+public class EquipoController {
     
     @Autowired 
-    private TipoEquipoService tipoEquipoService;
+    private EquipoService equipoService;
     
-    @GetMapping("/form")
+    @Autowired
+    private TipoEquipoService tipoEquiServ;
+    
+    @GetMapping("/from")
     public String form( Model model){
-        TipoEquipo tipEqui = new TipoEquipo();
-        model.addAttribute("TipoEquipo", tipEqui);
-        return "tipoEquipo/form";
+        
+        Equipo Equi = new Equipo();
+        
+        List<TipoEquipo> lisTipoEqui = tipoEquiServ.findAll();
+        model.addAttribute("Equipo", Equi);
+        model.addAttribute("listTipoEqui", lisTipoEqui);
+        
+        return "equipo/from";
     }
     
-    @PostMapping("/form")
-    public String guardar(@Valid TipoEquipo tipEqui ,SessionStatus status){
-            tipoEquipoService.save(tipEqui);
+    @PostMapping("/from")
+    public String guardar(@Valid Equipo equi ,SessionStatus status){
+            
+        equi.setEstado("P");
+        equipoService.save(equi);
         
         status.setComplete();
-        return "redirect:form";
+        return "redirect:from";
     }
+    
 }

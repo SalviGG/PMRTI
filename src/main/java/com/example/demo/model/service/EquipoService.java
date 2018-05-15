@@ -5,22 +5,17 @@
  */
 package com.example.demo.model.service;
 
-
-import com.example.demo.model.entity.TipoEquipo;
+import com.example.demo.model.entity.Equipo;
 import java.util.List;
 import java.util.Optional;
-
-
 
 /**
  *
  * @author Asus
  */
-
-public interface TipoEquipoService {
-   public List<TipoEquipo> findAll();
-   public void save (TipoEquipo tipEqui);
-   public Optional<TipoEquipo> findOne(int id);
-   public void delete(int id);
-    
+public interface EquipoService  {
+    public List<Equipo> findAll();
+    public void save(Equipo equipo);
+    public Optional<Equipo> findOne(int id);
+    public void delete(int id);
 }
