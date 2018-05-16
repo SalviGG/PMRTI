@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>Tipos de contratos</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Eliminar
+                    </th>
+                    <th>
+                        Editar
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tipo : ${listTipoEquipo}">
+                    <td th:text="${tipo.id_tipo_equipo}"></td>
+                    <td th:text="${tipo.nombre}"></td> 
+                    <td>
+                        <form th:action="${'http://localhost:8080/tipoEquipo/eliminar/'+tipo.id_tipo_equipo}"> 
+                            <input type="submit" value="Eliminar" />
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="${'http://localhost:8080/tipoEquipo/editar/'+tipo.id_tipo_equipo}"> 
+                            <input type="submit" value="Editar" />
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
