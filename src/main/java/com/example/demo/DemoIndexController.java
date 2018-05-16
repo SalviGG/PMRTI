@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class IndexController {
+public class DemoIndexController {
 
     @RequestMapping("/")
     public String index(Model model){
