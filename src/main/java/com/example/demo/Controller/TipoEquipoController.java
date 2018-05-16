@@ -73,7 +73,7 @@ public class TipoEquipoController {
     public String saveEdit(@Valid TipoEquipo tipEqui ,SessionStatus status){        
         tipoEquipoService.save(tipEqui); 
         status.setComplete();
-        return "redirect:https://www.google.cl/";
+        return "redirect:listar";
     }
     
     @GetMapping("/form")
