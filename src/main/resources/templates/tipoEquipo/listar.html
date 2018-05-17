@@ -11,7 +11,11 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>Tipos de contratos</div>
+        <div>Tipos de contratos 
+            <form th:action="${'http://localhost:8080/tipoEquipo/form'}"> 
+                            <input type="submit" value="Crear Tipo Equipo" />
+            </form>
+        </div>
         <table>
             <thead>
                 <tr>

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,15 @@ public class EquipoController {
     @Autowired
     private TipoEquipoService tipoEquiServ;
     
-    @GetMapping("/from")
+    @GetMapping("/listar")
+    public String listado(Model model){
+        
+        model.addAttribute("listEquipo", equipoService.findAll());
+        
+        return "equipo/listar";
+    }
+    
+    @GetMapping("/form")
     public String form( Model model){
         
         Equipo Equi = new Equipo();
@@ -46,7 +55,7 @@ public class EquipoController {
         model.addAttribute("Equipo", Equi);
         model.addAttribute("listTipoEqui", lisTipoEqui);
         
-        return "equipo/from";
+        return "equipo/form";
     }
     
     @PostMapping("/from")
@@ -56,7 +65,29 @@ public class EquipoController {
         equipoService.save(equi);
         
         status.setComplete();
-        return "redirect:from";
+        return "redirect:listar";
     }
     
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable int id,Model model,SessionStatus status){
+        Equipo equi = equipoService.findOne(id).orElse(null);
+        if(equi != null){
+            equipoService.delete(id);
+            status.setComplete();
+        }        
+        return "redirect:../listar";
+    }
+    
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable int id,Model model){
+        Equipo equi = equipoService.findOne(id).orElse(null);
+        if(equi != null){
+            
+            List<TipoEquipo> lisTipoEqui = tipoEquiServ.findAll();
+            model.addAttribute("Equipo", equi);
+            model.addAttribute("listTipoEqui", lisTipoEqui);
+            return "equipo/editar/from";
+        }
+        return "redirect:listar";
+    }
 }

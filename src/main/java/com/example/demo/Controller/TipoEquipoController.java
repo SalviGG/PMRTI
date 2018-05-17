@@ -46,12 +46,9 @@ public class TipoEquipoController {
         if(tipoEqui != null){
             tipoEquipoService.delete(id);
             
-        }
-        List<TipoEquipo> list = tipoEquipoService.findAll();
-        model.addAttribute("listTipoEquipo", list);
+        }       
         
-        
-        return "tipoEquipo/listar";
+        return "redirect:listar";
         
     }
     
@@ -65,7 +62,7 @@ public class TipoEquipoController {
             return "tipoEquipo/editar/from";
         }       
         
-        return "tipoEquipo/listar";
+        return "redirect:listar";
         
     }
     
@@ -88,6 +85,6 @@ public class TipoEquipoController {
             tipoEquipoService.save(tipEqui);
         System.out.print("nuevo");
         status.setComplete();
-        return "redirect:form";
+        return "redirect:listar";
     }
 }
