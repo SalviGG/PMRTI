@@ -5,13 +5,13 @@
  */
 package com.example.demo.model.DAO;
 
-import com.example.demo.model.entity.TipoEquipo;
+import com.example.demo.model.entity.Equipo;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author Asus
  */
-public interface ITipoEquipo extends CrudRepository<TipoEquipo, Integer>{
+public interface IEquipo extends CrudRepository<Equipo, Integer>{
     
 }

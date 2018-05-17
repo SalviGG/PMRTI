@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>Mantenedor de Equipos
+            <form th:action="${'http://localhost:8080/equipo/form'}"> 
+                <input type="submit" value="Crear Tipo Equipo" />
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Tipo Equipo
+                    </th>
+                    <th>
+                        serie
+                    </th>
+                    <th>
+                        cod_interno
+                    </th>
+                    <th>
+                        marca
+                    </th>
+                    <th>
+                        modelo
+                    </th>
+                    <th>
+                        estado
+                    </th>
+                    <th>
+                        eliminar
+                    </th>
+                    <th>
+                        editar
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="equipo : ${listEquipo}">
+                    <td th:text="${equipo.id_equipo}">
+                        ID
+                    </td>
+                    <td th:text="${equipo.tipoEquipo.nombre}">
+                        Tipo Equipo
+                    </td>
+                    <td th:text="${equipo.serie}">
+                        serie
+                    </td>
+                    <td th:text="${equipo.cod_interno}">
+                        cod_interno
+                    </td>
+                    <td th:text="${equipo.marca}">
+                        marca
+                    </td>
+                    <td th:text="${equipo.modelo}">
+                        modelo
+                    </td>
+                    <td th:text="${equipo.estado}">
+                        estado
+                    </td>
+                    <th>
+                        <form th:action="${'http://localhost:8080/equipo/eliminar/'+equipo.id_equipo}"> 
+                            <input type="submit" value="Eliminar" />
+                        </form>
+                    </th>
+                    <th>
+                        <form th:action="${'http://localhost:8080/equipo/editar/'+equipo.id_equipo}"> 
+                            <input type="submit" value="Editar" />
+                        </form>
+                    </th>
+                </tr>
+            </tbody>
+            
+        </table>
+    </body>
+</html>

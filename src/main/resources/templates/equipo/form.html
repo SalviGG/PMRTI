@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>from para equipo</div>
+       
+         <form th:action="@{/equipo/from}" th:object="${Equipo}" method="post" enctype="multipart/form-data">
+                
+             <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
+                    <option value="">Tipo Equipo</option>
+                    <option th:each="tipoEqui : ${listTipoEqui}"
+                            th:value="${tipoEqui.id_tipo_equipo}"
+                            th:text="${tipoEqui.nombre}"></option>
+             </select><br/>
+             serie:<input type="text" th:field="*{serie}"/><br/>
+             codigo interno:<input type="text" th:field="*{cod_interno}"/><br/>
+             marca:<input type="text" th:field="*{marca}"/><br/>
+             modelo:<input type="text" th:field="*{modelo}"/><br/>
+             
+            <input type="submit" value="enviar"/>
+            
+         </form>
+    </body>
+</html>
