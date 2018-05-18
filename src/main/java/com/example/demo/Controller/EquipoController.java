@@ -58,7 +58,7 @@ public class EquipoController {
         return "equipo/form";
     }
     
-    @PostMapping("/from")
+    @PostMapping("/form")
     public String guardar(@Valid Equipo equi ,SessionStatus status){
             
         equi.setEstado("P");
