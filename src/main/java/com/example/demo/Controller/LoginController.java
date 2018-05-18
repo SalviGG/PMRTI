@@ -29,4 +29,9 @@ public class LoginController {
         return "login/page-login";
     }
     
+    @PostMapping("page-login")
+    public String ingresar(){
+        return "redirect:/index/index";
+    }
+    
 }
