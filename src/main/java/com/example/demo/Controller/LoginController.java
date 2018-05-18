@@ -21,17 +21,17 @@ import org.springframework.web.bind.support.SessionStatus;
  * @author sgutierrez
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/")
 public class LoginController {
     
-    @GetMapping("page-login")
+    @GetMapping("")
     public String login(){
         return "login/page-login";
     }
     
     @PostMapping("page-login")
     public String ingresar(){
-        return "redirect:/index/index";
+        return "redirect:/index";
     }
     
 }

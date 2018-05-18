@@ -30,5 +30,9 @@ public class IndexController {
         return "index/index";
     }
     
+    @GetMapping("")
+    public String index2(){
+        return "index/index";
+    }
     
 }

@@ -35,6 +35,7 @@ public class EquipoController {
     @Autowired 
     private EquipoService equipoService;
     
+    
     @Autowired
     private TipoEquipoService tipoEquiServ;
     
