@@ -10,7 +10,7 @@ import com.example.demo.model.entity.TipoEquipo;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
+
 
 /**
  *

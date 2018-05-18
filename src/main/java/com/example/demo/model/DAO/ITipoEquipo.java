@@ -5,7 +5,6 @@
  */
 package com.example.demo.model.DAO;
 
-
 import com.example.demo.model.entity.TipoEquipo;
 import org.springframework.data.repository.CrudRepository;
 
