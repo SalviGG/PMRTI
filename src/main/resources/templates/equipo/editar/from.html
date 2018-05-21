@@ -14,7 +14,7 @@ and open the template in the editor.
         <div>
             editar equipo
         </div>
-        <form th:action="@{/equipo/from}" th:object="${Equipo}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/equipo/form}" th:object="${Equipo}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:field="*{id_equipo}" th:value="${Equipo.id_equipo}" />
              <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
                     
@@ -24,6 +24,15 @@ and open the template in the editor.
                             th:selected="${tipoEqui.id_tipo_equipo == Equipo.tipoEquipo.id_tipo_equipo}" 
                             ></option>
              </select><br/>
+             
+            <label for="testOrder" class="control-label">Estado</label>
+            <select th:field="*{estado}" class="form-control"  id="testOrder" name="testOrder">
+                
+                <option th:each="estado : ${listEstado}"
+                        th:value="${estado.id}"
+                        th:text="${estado.descEstado}"></option>
+            </select><br/>
+                                        
              serie:<input type="text" th:field="*{serie}"/><br/>
              codigo interno:<input type="text" th:field="*{cod_interno}"/><br/>
              marca:<input type="text" th:field="*{marca}"/><br/>

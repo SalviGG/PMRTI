@@ -7,8 +7,10 @@ package com.example.demo.Controller;
 
 
 import com.example.demo.model.entity.Equipo;
+import com.example.demo.model.entity.EstadoEquipo;
 import com.example.demo.model.entity.TipoEquipo;
 import com.example.demo.model.service.EquipoService;
+import com.example.demo.model.service.EstadoEquipoService;
 import com.example.demo.model.service.TipoEquipoService;
 import java.util.List;
 import javax.validation.Valid;
@@ -35,6 +37,8 @@ public class EquipoController {
     @Autowired 
     private EquipoService equipoService;
     
+    @Autowired
+    private EstadoEquipoService estadoEquipoService;
     
     @Autowired
     private TipoEquipoService tipoEquiServ;
@@ -53,20 +57,25 @@ public class EquipoController {
         Equipo Equi = new Equipo();
         
         List<TipoEquipo> lisTipoEqui = tipoEquiServ.findAll();
+        
         model.addAttribute("Equipo", Equi);
         model.addAttribute("listTipoEqui", lisTipoEqui);
+        List<EstadoEquipo> lisEstado = estadoEquipoService.findAll(); 
+        model.addAttribute("listEstado", lisEstado);
         
         return "equipo/form";
     }
     
     @PostMapping("/form")
     public String guardar(@Valid Equipo equi ,SessionStatus status){
-            
-        equi.setEstado("P");
+          
+       
+       
+        
         equipoService.save(equi);
         
         status.setComplete();
-        return "redirect:listar";
+        return "redirect:/equipo/listar";
     }
     
     @GetMapping("/eliminar/{id}")
@@ -87,6 +96,8 @@ public class EquipoController {
             List<TipoEquipo> lisTipoEqui = tipoEquiServ.findAll();
             model.addAttribute("Equipo", equi);
             model.addAttribute("listTipoEqui", lisTipoEqui);
+            List<EstadoEquipo> lisEstado = estadoEquipoService.findAll(); 
+            model.addAttribute("listEstado", lisEstado);
             return "equipo/editar/from";
         }
         return "redirect:listar";
