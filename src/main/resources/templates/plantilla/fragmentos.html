@@ -1,10 +1,12 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> 
-<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
-    <head>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> 
+    
+        <head th:fragment="head">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>PMRTI</title>
@@ -29,12 +31,9 @@
         <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
     </head>
+        
     <body>
-
-
-        <!-- Left Panel -->
-
-        <aside id="left-panel" class="left-panel">
+        <aside id="left-panel" class="left-panel" th:fragment="aside">
             <nav class="navbar navbar-expand-sm navbar-default">
 
                 <div class="navbar-header">
@@ -82,16 +81,11 @@
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </nav>
-        </aside><!-- /#left-panel -->
-
-        <!-- Left Panel -->
-
-        <!-- Right Panel -->
-
+        </aside>
         <div id="right-panel" class="right-panel">
 
             <!-- Header-->
-            <header id="header" class="header">
+            <header id="header" class="header" th:fragment="header">
 
                 <div class="header-menu">
 
@@ -150,7 +144,7 @@
             </header><!-- /header -->
             <!-- Header-->
 
-            <div class="breadcrumbs">
+            <div class="breadcrumbs" th:fragment="breadcrumds">
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
@@ -171,18 +165,6 @@
 
             <div class="content mt-3">
 
-                <!-- Ejemplo de alerta-->
-
-                <!--            <div class="col-sm-12">
-                                <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                                  <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            </div>-->
-
-
                 <div class="col-xl-6">
                     <div class="card">
                         <div class="card-body">
@@ -198,59 +180,7 @@
                             </div>
                                 <!--/.col-->
                                 <div class="chart-wrapper mt-4" >
-                                    <form th:action="@{/equipo/form}" th:object="${Equipo}" method="post" enctype="multipart/form-data" class="form-horizontal">
-
-                                        <div class="form-group">
-                                            <label for="testOrder" class="control-label">Tipo de equipo</label>
-                                            <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
-                                                <option value="">Tipo Equipo</option>
-                                                <option th:each="tipoEqui : ${listTipoEqui}"
-                                                        th:value="${tipoEqui.id_tipo_equipo}"
-                                                        th:text="${tipoEqui.nombre}"></option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="testOrder" class="control-label">Estado del esquipo</label>
-                                            <select th:field="*{estado}" class="form-control"   >
-                                                <option value="">estado</option>
-                                                <option th:each="estado : ${listEstado}"
-                                                        th:value="${estado.id}"
-                                                        th:text="${estado.descEstado}"></option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label for="serie" class="control-label">Serie</label>
-                                            <div>
-                                                <input type="text" th:field="*{serie}" class="form-control" id="serie"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="cod_interno" class="control-label">Codigo interno</label>
-                                            <div>
-                                                <input type="text" th:field="*{cod_interno}" class="form-control" id="cod_interno"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="marca" class="control-label">Marca</label>
-                                            <div>
-                                                <input type="text" th:field="*{marca}" class="form-control" id="marca"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="modelo" class="control-label">Modelo</label>
-                                            <div>
-                                                <input type="text" th:field="*{modelo}" class="form-control" id="modelo"/>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <div>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
+                                    
                                 </div>
                                 <!--/.col-->
                             </div><!--/.row-->
@@ -289,9 +219,7 @@
 
             </div> <!-- .content -->
         </div><!-- /#right-panel -->
-
-        <!-- Right Panel -->
-        <footer style="display: none">
+    <footer style="display: none" th:fragment="footer">
         <script src="../../js/vendor/jquery-2.1.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
         <script src="../../js/plugins.js"></script>
@@ -323,5 +251,6 @@
             })(jQuery);
         </script>
         </footer>
-    </body>
+    </body>    
+        
 </html>
