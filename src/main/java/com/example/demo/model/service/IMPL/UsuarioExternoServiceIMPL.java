@@ -28,7 +28,7 @@ public class UsuarioExternoServiceIMPL  implements UsuarioExternoService{
             com.example.demo.Usuarios port = service.getUsuariosPort();
             // TODO process result here
             java.util.List<com.example.demo.Usuario> result = port.findAll();
-            UsuarioExterno user =null;
+            UsuarioExterno user = null;
             for (Usuario usuario : result) {
                 user = new UsuarioExterno();
                 user.setIdUsuario(usuario.getIdUsuario());
@@ -38,6 +38,7 @@ public class UsuarioExternoServiceIMPL  implements UsuarioExternoService{
                 user.setName(usuario.getName());
                 user.setIdNacional(usuario.getIdNacional());
                 user.setEstado(usuario.getEstado());
+                user.setDepartamento(usuario.getDepartament());
                 list.add(user);
             }
         } catch (Exception ex) {
@@ -65,7 +66,7 @@ public class UsuarioExternoServiceIMPL  implements UsuarioExternoService{
             user.setName(result.getName());
             user.setIdNacional(result.getIdNacional());
             user.setEstado(result.getEstado());
-            
+            user.setDepartamento(result.getDepartament());
             
         } catch (Exception ex) {
             // TODO handle custom exceptions here
@@ -92,6 +93,7 @@ public class UsuarioExternoServiceIMPL  implements UsuarioExternoService{
             user.setName(result.getName());
             user.setIdNacional(result.getIdNacional());
             user.setEstado(result.getEstado());
+            user.setDepartamento(result.getDepartament());
         } catch (Exception ex) {
             // TODO handle custom exceptions here
         }
@@ -100,23 +102,25 @@ public class UsuarioExternoServiceIMPL  implements UsuarioExternoService{
 
     @Override
     public UsuarioExterno findOne(String email, String passwer) {
-         UsuarioExterno user = new UsuarioExterno();
+         UsuarioExterno user = null;
         try { // Call Web Service Operation
             com.example.demo.Usuarios_Service service = new com.example.demo.Usuarios_Service();
             com.example.demo.Usuarios port = service.getUsuariosPort();
-            // TODO initialize WS operation arguments here
-            
+            // TODO initialize WS operation arguments here            
             // TODO process result here
-            com.example.demo.Usuario result = port.findEmailPasswer(email, passwer);
-            user = new UsuarioExterno();
+            com.example.demo.Usuario result = port.findEmailPasswer(email, passwer);          
             
-            user.setIdUsuario(result.getIdUsuario());
-            user.setEmail(result.getEmail());
-            user.setPasswer(result.getPasswer());
-            user.setLastName(result.getLastName());
-            user.setName(result.getName());
-            user.setIdNacional(result.getIdNacional());
-            user.setEstado(result.getEstado());
+            if(result.getIdUsuario() > 0){
+                user = new UsuarioExterno();                
+                user.setIdUsuario(result.getIdUsuario());
+                user.setEmail(result.getEmail());
+                user.setPasswer(result.getPasswer());
+                user.setLastName(result.getLastName());
+                user.setName(result.getName());
+                user.setIdNacional(result.getIdNacional());
+                user.setEstado(result.getEstado());
+                user.setDepartamento(result.getDepartament());
+            } 
         } catch (Exception ex) {
             // TODO handle custom exceptions here
         }

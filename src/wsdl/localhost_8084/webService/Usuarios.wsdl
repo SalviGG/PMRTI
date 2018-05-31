@@ -16,17 +16,17 @@
 <message name="findAllResponse">
 <part name="parameters" element="tns:findAllResponse"/>
 </message>
-<message name="findIdNacional">
-<part name="parameters" element="tns:findIdNacional"/>
-</message>
-<message name="findIdNacionalResponse">
-<part name="parameters" element="tns:findIdNacionalResponse"/>
-</message>
 <message name="findId">
 <part name="parameters" element="tns:findId"/>
 </message>
 <message name="findIdResponse">
 <part name="parameters" element="tns:findIdResponse"/>
+</message>
+<message name="findIdNacional">
+<part name="parameters" element="tns:findIdNacional"/>
+</message>
+<message name="findIdNacionalResponse">
+<part name="parameters" element="tns:findIdNacionalResponse"/>
 </message>
 <portType name="Usuarios">
 <operation name="findEmailPasswer">
@@ -37,13 +37,13 @@
 <input wsam:Action="http://webservice.mycompany.com/Usuarios/findAllRequest" message="tns:findAll"/>
 <output wsam:Action="http://webservice.mycompany.com/Usuarios/findAllResponse" message="tns:findAllResponse"/>
 </operation>
-<operation name="findIdNacional">
-<input wsam:Action="http://webservice.mycompany.com/Usuarios/findIdNacionalRequest" message="tns:findIdNacional"/>
-<output wsam:Action="http://webservice.mycompany.com/Usuarios/findIdNacionalResponse" message="tns:findIdNacionalResponse"/>
-</operation>
 <operation name="findId">
 <input wsam:Action="http://webservice.mycompany.com/Usuarios/findIdRequest" message="tns:findId"/>
 <output wsam:Action="http://webservice.mycompany.com/Usuarios/findIdResponse" message="tns:findIdResponse"/>
+</operation>
+<operation name="findIdNacional">
+<input wsam:Action="http://webservice.mycompany.com/Usuarios/findIdNacionalRequest" message="tns:findIdNacional"/>
+<output wsam:Action="http://webservice.mycompany.com/Usuarios/findIdNacionalResponse" message="tns:findIdNacionalResponse"/>
 </operation>
 </portType>
 <binding name="UsuariosPortBinding" type="tns:Usuarios">
@@ -66,7 +66,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="findIdNacional">
+<operation name="findId">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -75,7 +75,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="findId">
+<operation name="findIdNacional">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

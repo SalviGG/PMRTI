@@ -29,6 +29,7 @@
 <xs:complexType name="usuario">
 <xs:sequence>
 <xs:element name="birthdate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="departament" type="xs:string" minOccurs="0"/>
 <xs:element name="email" type="xs:string" minOccurs="0"/>
 <xs:element name="estado" type="xs:string" minOccurs="0"/>
 <xs:element name="idUsuario" type="xs:int"/>
