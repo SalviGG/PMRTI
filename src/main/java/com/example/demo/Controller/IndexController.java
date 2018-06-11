@@ -7,7 +7,10 @@ package com.example.demo.Controller;
 
 //Import de dependencias
 import com.example.demo.model.entity.TipoEquipo;
+import com.example.demo.model.entity.UsuarioExterno;
 import com.example.demo.model.service.TipoEquipoService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,12 +29,26 @@ import org.springframework.web.bind.support.SessionStatus;
 public class IndexController {
     
     @GetMapping("index")
-    public String form(){
+    public String form( HttpServletRequest request){
+        
+        UsuarioExterno user = (UsuarioExterno)request.getSession().getAttribute("usuario");
+        
+        if (user == null){
+         return"redirect:/";
+        }
+        
         return "index/index";
     }
     
     @GetMapping("")
-    public String index2(){
+    public String index2(HttpSession request){
+        
+        UsuarioExterno user = (UsuarioExterno)request.getAttribute("usuario");
+        
+        if (user == null){
+            return"redirect:/";
+        }
+        System.out.println(user.getName());
         return "index/index";
     }
     

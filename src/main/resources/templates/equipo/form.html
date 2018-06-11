@@ -210,6 +210,16 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label for="testOrder" class="control-label">Estado del esquipo</label>
+                                            <select th:field="*{estado}" class="form-control"   >
+                                                <option value="">estado</option>
+                                                <option th:each="estado : ${listEstado}"
+                                                        th:value="${estado.id}"
+                                                        th:text="${estado.descEstado}"></option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
                                             <label for="serie" class="control-label">Serie</label>
                                             <div>
                                                 <input type="text" th:field="*{serie}" class="form-control" id="serie"/>
@@ -233,11 +243,13 @@
                                                 <input type="text" th:field="*{modelo}" class="form-control" id="modelo"/>
                                             </div>
                                         </div>
+                                        
                                         <div class="form-group">
                                             <div>
                                                 <button type="submit" class="btn btn-primary">Enviar</button>
                                             </div>
                                         </div>
+                                        
                                     </form>
                                 </div>
                                 <!--/.col-->
@@ -279,12 +291,11 @@
         </div><!-- /#right-panel -->
 
         <!-- Right Panel -->
-
+        <footer style="display: none">
         <script src="../../js/vendor/jquery-2.1.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
         <script src="../../js/plugins.js"></script>
         <script src="../../js/main.js"></script>
-
 
         <script src="../../js/lib/chart-js/Chart.bundle.js"></script>
         <script src="../../js/dashboard.js"></script>
@@ -311,6 +322,6 @@
                 });
             })(jQuery);
         </script>
-
+        </footer>
     </body>
 </html>

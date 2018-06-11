@@ -1,10 +1,12 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> 
-<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
-    <head>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> 
+    
+        <head th:fragment="head">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>PMRTI</title>
@@ -29,12 +31,9 @@
         <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
     </head>
+        
     <body>
-
-
-        <!-- Left Panel -->
-
-        <aside id="left-panel" class="left-panel">
+        <aside id="left-panel" class="left-panel" th:fragment="aside">
             <nav class="navbar navbar-expand-sm navbar-default">
 
                 <div class="navbar-header">
@@ -82,16 +81,11 @@
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </nav>
-        </aside><!-- /#left-panel -->
-
-        <!-- Left Panel -->
-
-        <!-- Right Panel -->
-
+        </aside>
         <div id="right-panel" class="right-panel">
 
             <!-- Header-->
-            <header id="header" class="header">
+            <header id="header" class="header" th:fragment="header">
 
                 <div class="header-menu">
 
@@ -150,7 +144,7 @@
             </header><!-- /header -->
             <!-- Header-->
 
-            <div class="breadcrumbs">
+            <div class="breadcrumbs" th:fragment="breadcrumds">
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
@@ -171,101 +165,22 @@
 
             <div class="content mt-3">
 
-                <!-- Ejemplo de alerta-->
-
-                <!--            <div class="col-sm-12">
-                                <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                                  <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            </div>-->
-
-
                 <div class="col-xl-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <h4 class="card-title mb-0">Listado de equipos</h4>
-                                    <div class="small text-muted">--</div>
+                                <div class="col-sm-4">
+                                    <h4 class="card-title mb-0">Registrar Equipo</h4>
+                                    <div class="small text-muted">Datos del equipo</div>
                                 </div>
                                 <!--/.col-->
                                 <!--/.col-->
-                                <div class="col-sm-8 hidden-sm-down">
-
-                                </div>
+                            <div class="col-sm-8 hidden-sm-down">
+                                
+                            </div>
                                 <!--/.col-->
-                                <div class="chart-wrapper mt-6" >
-                                    <table class="table-striped table-bordered">
-                                        <thead class="thead-inverse">
-                                            <tr>
-                                                <th>
-                                                    ID
-                                                </th>
-                                                <th>
-                                                    Tipo Equipo
-                                                </th>
-                                                <th>
-                                                    Serie
-                                                </th>
-                                                <th>
-                                                    Cod interno
-                                                </th>
-                                                <th>
-                                                    Marca
-                                                </th>
-                                                <th>
-                                                    Modelo
-                                                </th>
-                                                <th>
-                                                    Estado
-                                                </th>
-                                                <th>
-                                                    Eliminar
-                                                </th>
-                                                <th>
-                                                    Editar
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="equipo : ${listEquipo}">
-                                                <td th:text="${equipo.id_equipo}">
-                                                    ID
-                                                </td>
-                                                <td th:text="${equipo.tipoEquipo.nombre}">
-                                                    Tipo Equipo
-                                                </td>
-                                                <td th:text="${equipo.serie}">
-                                                    serie
-                                                </td>
-                                                <td th:text="${equipo.cod_interno}">
-                                                    cod_interno
-                                                </td>
-                                                <td th:text="${equipo.marca}">
-                                                    marca
-                                                </td>
-                                                <td th:text="${equipo.modelo}">
-                                                    modelo
-                                                </td>
-                                                <td th:text="${equipo.estado.descEstado}">
-                                                    estado
-                                                </td>
-                                                <th>
-                                                    <form th:action="${'http://localhost:8080/equipo/eliminar/'+equipo.id_equipo}"> 
-                                                        <button class="btn btn-primary" type="submit">Eliminar</button>
-                                                    </form>
-                                                </th>
-                                                <th>
-                                                    <form th:action="${'http://localhost:8080/equipo/editar/'+equipo.id_equipo}"> 
-                                                        <button class="btn btn-primary" type="submit">Editar</button>
-                                                    </form>
-                                                </th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="chart-wrapper mt-4" >
+                                    
                                 </div>
                                 <!--/.col-->
                             </div><!--/.row-->
@@ -304,14 +219,11 @@
 
             </div> <!-- .content -->
         </div><!-- /#right-panel -->
-
-        <!-- Right Panel -->
-
+    <footer style="display: none" th:fragment="footer">
         <script src="../../js/vendor/jquery-2.1.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
         <script src="../../js/plugins.js"></script>
         <script src="../../js/main.js"></script>
-
 
         <script src="../../js/lib/chart-js/Chart.bundle.js"></script>
         <script src="../../js/dashboard.js"></script>
@@ -338,6 +250,7 @@
                 });
             })(jQuery);
         </script>
-
-    </body>
+        </footer>
+    </body>    
+        
 </html>

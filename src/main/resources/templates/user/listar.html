@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> 
+    <head th:include="plantilla/fragmentos :: head">
+        
+    </head>
+    <body>
+        <aside id="left-panel" class="left-panel" th:include="plantilla/fragmentos :: aside">
+            
+        </aside>
+        <div id="right-panel" class="right-panel">
+            <header id="header" class="header" th:include="plantilla/fragmentos :: header">
+                
+            </header>
+            <div class="breadcrumbs" th:include="plantilla/fragmentos :: breadcrumds" >
+                
+            </div>
+            <div class="content mt-3">
+
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h4 class="card-title mb-0">Registrar Equipo</h4>
+                                    <div class="small text-muted">Datos del equipo</div>
+                                </div>
+                                <!--/.col-->
+                                <!--/.col-->
+                            <div class="col-sm-8 hidden-sm-down">
+                                
+                            </div>
+                                <!--/.col-->
+                                <div class="chart-wrapper mt-4" >
+                                    <!--area de trabajo-->
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>nombre</th>
+                                                <th>apellidos</th>
+                                                <th>Email</th>
+                                                <th>departamento</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="user : ${listUser}">
+                                                <td th:text="${user.name}" ></td>
+                                                <td th:text="${user.lastName}" ></td>
+                                                <td th:text="${user.email}" ></td>
+                                                <td th:text="${user.departamento}"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+                                <!--/.col-->
+                            </div><!--/.row-->
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Equipos asignados</div>
+                                    <div class="stat-digit">260</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib"><i class="ti-layout-grid2 text-warning border-warning"></i></div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Equipos en prestamo</div>
+                                    <div class="stat-digit">15</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+        <footer style="display: none" th:include="plantilla/fragmentos :: footer">
+            
+        </footer>
+    </body>
+</html>
