@@ -33,6 +33,9 @@ and open the template in the editor.
     </head>
         
     <body>
+        <div th:if="${usuario } != null"> 
+            <span th:text="${usuario.departamento }">yonis</span>
+        </div>
         <aside id="left-panel" class="left-panel" th:fragment="aside">
             <nav class="navbar navbar-expand-sm navbar-default">
 

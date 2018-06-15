@@ -32,6 +32,13 @@ public class LoginController {
     @Autowired
     private UsuarioExternoService usuarioExternoService;
     
+    
+    @GetMapping("prueba")
+    public String prueba(Model model){
+        model.addAttribute("usuario", null);
+        return "plantilla/fragmentos";
+    }
+      
     @GetMapping("")
     public String login(Model model){
         
@@ -40,7 +47,7 @@ public class LoginController {
         return "/login/page-login";
     }
     
-    @PostMapping("page-login")
+    @PostMapping("/page-login")
     public String ingresar(@Valid Login login ,SessionStatus status ,Model model,HttpSession request){
         
         UsuarioExterno user = usuarioExternoService.findOne(login.getUser(), login.getPass());
