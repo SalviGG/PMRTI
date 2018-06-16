@@ -33,8 +33,8 @@ and open the template in the editor.
     </head>
         
     <body>
-        <div th:if="${usuario } != null"> 
-            <span th:text="${usuario.departamento }">yonis</span>
+        <div th:if="${session.usuario } != null"> 
+            <span th:text="${session.usuario.departamento }">yonis</span>
         </div>
         <aside id="left-panel" class="left-panel" th:fragment="aside">
             <nav class="navbar navbar-expand-sm navbar-default">
@@ -50,37 +50,40 @@ and open the template in the editor.
                 <div id="main-menu" class="main-menu collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a th:href="@{index}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard Administrador</a>
+                            <a th:href="@{index}" > <i class="menu-icon fa fa-dashboard"></i> Menu <span th:text="${session.usuario.departamento}"></span> </a>
+                            
                         </li>
-                        <h3 class="menu-title">Administración de equipos</h3><!-- /.menu-title -->
-                        <li class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Equipos</a>
+                        <h3 th:href="@{index}" class="menu-title">Opciones </h3><!-- /.menu-title -->
+                        
+                        <li th:href="@{index}" th:if="${session.usuario.departamento}== 'RRHH' or ${session.usuario.departamento}== 'ADM'  " class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Solicitudes Asinaciones</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/equipo/form}">Registrar Equipos</a></li>
-                                <li><i class="fa fa-bars"></i><a th:href="@{/equipo/listar}">Listar Equipos</a></li>
-                                <li><i class="fa fa-wrench"></i><a th:href="@{/tipoEquipo/listar}">Tipos de equipos</a></li>
-                                <li><i class="fa fa-th"></i><a href="ui-grids.html">Grids</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/solicitudAsig/creaSolicitud}">Solicilar Asignación de Equipo</a></li>
+                                <li><i class="fa fa-bars"></i><a th:href="@{/solicitudAsig/listaSoliAsig}"> Listar Solicitudes de asignación de equipos</a></li>                                                                
                             </ul>
                         </li>
-                        <h3 class="menu-title">Administración de usuarios</h3><!-- /.menu-title -->
-
-                        <li class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Usuarios</a>
+                        
+                        <li th:href="@{index}" th:if="${session.usuario.departamento}== 'RRHH' or ${session.usuario.departamento}== 'TI'  or ${session.usuario.departamento} == 'ADM'  " class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Prestamos</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="menu-icon fa fa-user"></i><a href="font-fontawesome.html">Crear usuario</a></li>
-                                <li><i class="menu-icon fa fa-key"></i><a href="font-themify.html">Cambiar contraseñas</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a th:href="@{//form}">Solicilar Prestamo</a></li>
+                                <li><i class="fa fa-bars"></i><a th:href="@{/equipo/listar}"> Listar Solicitudes Prestamo</a></li>                                                                
                             </ul>
                         </li>
-
-                        <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
-                        <li class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                            <ul class="sub-menu children dropdown-menu">
-                                <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                                <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                                <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
+                        <li th:href="@{index}" th:if="${session.usuario.departamento}== 'TI' or ${session.usuario.departamento}== 'ADM' " class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Entregas</a>
+                            <ul class="sub-menu children dropdown-menu">                                
+                                <li><i class="fa fa-bars"></i><a th:href="@{/equipo/listar}"> Listar Solicitudes</a></li>                                                                
                             </ul>
                         </li>
+                        <li th:href="@{index}" th:if="${session.usuario.departamento}== 'TI' or ${session.usuario.departamento}== 'ADM' " class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>recepcion de equipos</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/equipo/form}">recepcion de equipo</a></li>
+                                <li><i class="fa fa-bars"></i><a th:href="@{/equipo/listar}"> Listar Equipos Pendiente de Entrega</a></li>                                                                
+                            </ul>
+                        </li>
+                        
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </nav>

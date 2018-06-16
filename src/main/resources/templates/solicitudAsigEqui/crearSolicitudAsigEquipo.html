@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> 
+    <head th:include="plantilla/fragmentos :: head">
+        
+    </head>
+    <body>
+        <aside id="left-panel" class="left-panel" th:include="plantilla/fragmentos :: aside">
+            
+        </aside>
+        <div id="right-panel" class="right-panel">
+            <header id="header" class="header" th:include="plantilla/fragmentos :: header">
+                
+            </header>
+            <div class="breadcrumbs" th:include="plantilla/fragmentos :: breadcrumds" >
+                
+            </div>
+            <div class="content mt-3">
+
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h4 class="card-title mb-0">Solcitar asignacion de equipo</h4>
+                                    <div class="small text-muted">formulario</div>
+                                </div>
+                                <!--/.col-->
+                                <!--/.col-->
+                            <div class="col-sm-8 hidden-sm-down">
+                                
+                            </div>
+                                <!--/.col-->
+                                <div class="chart-wrapper mt-4" >
+                                    <!--area de trabajo-->
+                                    <form>   
+                                        <input type="hidden" name="rutSoli" />
+                                        <input type="hidden" name="rutBen" />
+                                        <input type="hidden" name="rutTi" />
+                                        <input type="hidden" name="fechaSoli" />
+                                        <input type="hidden" name="fechaRe" />
+                                        <input type="hidden" name="fechaDebu" />
+                                        
+                                        <div class="form-group">
+                                            <label for="testOrder" class="control-label">Tipo de equipo</label>
+                                            <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
+                                                <option value="">Tipo Equipo</option>
+                                                <option th:each="tipoEqui : ${listTipoEqui}"
+                                                        th:value="${tipoEqui.id_tipo_equipo}"
+                                                        th:text="${tipoEqui.nombre}"></option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="testOrder" class="control-label">Tipo de equipo</label>
+                                            <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
+                                                <option value="">Tipo Equipo</option>
+                                                <option th:each="tipoEqui : ${listTipoEqui}"
+                                                        th:value="${tipoEqui.id_tipo_equipo}"
+                                                        th:text="${tipoEqui.nombre}"></option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                    
+                                </div>
+                                <!--/.col-->
+                            </div><!--/.row-->
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Equipos asignados</div>
+                                    <div class="stat-digit">260</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib"><i class="ti-layout-grid2 text-warning border-warning"></i></div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Equipos en prestamo</div>
+                                    <div class="stat-digit">15</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+        <footer style="display: none" th:include="plantilla/fragmentos :: footer">
+            
+        </footer>
+    </body>
+</html>

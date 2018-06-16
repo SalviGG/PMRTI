@@ -21,7 +21,7 @@ public class UsuarioExterno {
     private Date birthdate;
     private String idNacional;
     private String estado;
-    private String Departamento;
+    private String departamento;
     
     public UsuarioExterno(){
         
@@ -92,11 +92,11 @@ public class UsuarioExterno {
     }
 
     public String getDepartamento() {
-        return Departamento;
+        return departamento;
     }
 
     public void setDepartamento(String Departamento) {
-        this.Departamento = Departamento;
+        this.departamento = Departamento;
     }
     
     
