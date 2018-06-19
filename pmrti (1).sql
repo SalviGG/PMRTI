@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2018 a las 03:10:59
+-- Tiempo de generación: 19-06-2018 a las 04:09:01
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -38,7 +38,8 @@ CREATE TABLE `documento` (
   `fecha_devolucion` date NOT NULL,
   `estado` int(11) NOT NULL,
   `tipo_documento` varchar(3) NOT NULL,
-  `id_equipo` int(11) NOT NULL
+  `id_equipo` int(11) NOT NULL,
+  `id_tipo_Equipo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -155,7 +156,8 @@ CREATE TABLE `tmp_usuario` (
 ALTER TABLE `documento`
   ADD PRIMARY KEY (`id_documento`),
   ADD KEY `estado` (`estado`),
-  ADD KEY `id_equipo` (`id_equipo`);
+  ADD KEY `id_equipo` (`id_equipo`),
+  ADD KEY `id_tipo_Equipo` (`id_tipo_Equipo`);
 
 --
 -- Indices de la tabla `equipo`
@@ -226,7 +228,8 @@ ALTER TABLE `tipo_equipo`
 --
 ALTER TABLE `documento`
   ADD CONSTRAINT `documento_ibfk_1` FOREIGN KEY (`estado`) REFERENCES `estado_documento` (`id_estado`),
-  ADD CONSTRAINT `documento_ibfk_2` FOREIGN KEY (`id_equipo`) REFERENCES `equipo` (`id_equipo`);
+  ADD CONSTRAINT `documento_ibfk_2` FOREIGN KEY (`id_equipo`) REFERENCES `equipo` (`id_equipo`),
+  ADD CONSTRAINT `documento_ibfk_3` FOREIGN KEY (`id_tipo_Equipo`) REFERENCES `tipo_equipo` (`id_tipo_equipo`);
 
 --
 -- Filtros para la tabla `equipo`
