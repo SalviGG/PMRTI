@@ -35,10 +35,10 @@ public class Documento {
     private  Integer rutSolicitante;
     
     @Column(name = "rut_receptor")
-    private  String rut_receptor;
+    private  String rutReceptor;
     
     @Column(name = "rut_TI")
-    private  String rut_TI;
+    private  String rutTI;
     
     @Column(name = "fecha_solicitud")
     @Temporal(TemporalType.DATE)
@@ -46,11 +46,11 @@ public class Documento {
  
     @Column(name = "fecha_entrega")
     @Temporal(TemporalType.DATE)
-    private  Date fecha_entrega;
+    private  Date fechaEntrega;
     
     @Column(name = "fecha_devolucion")
     @Temporal(TemporalType.DATE)
-    private  Date fecha_devolucion;
+    private  Date fechaDevolucion;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado")
@@ -63,6 +63,10 @@ public class Documento {
     @JoinColumn(name = "id_equipo")
     private  Equipo equipo;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tipo_Equipo")
+    private  TipoEquipo tipoEquipo;
+    
     public Documento(){
     }
 
@@ -74,52 +78,52 @@ public class Documento {
         this.id = id;
     }
 
-    public int getRutSolicitante() {
+    public Integer getRutSolicitante() {
         return rutSolicitante;
     }
 
-    public void setRutSolicitante(int rutSolicitante) {
+    public void setRutSolicitante(Integer rutSolicitante) {
         this.rutSolicitante = rutSolicitante;
     }
 
-    public String getRut_receptor() {
-        return rut_receptor;
+    public String getRutReceptor() {
+        return rutReceptor;
     }
 
-    public void setRut_receptor(String rut_receptor) {
-        this.rut_receptor = rut_receptor;
+    public void setRutReceptor(String rutReceptor) {
+        this.rutReceptor = rutReceptor;
     }
 
-    public String getRut_TI() {
-        return rut_TI;
+    public String getRutTI() {
+        return rutTI;
     }
 
-    public void setRut_TI(String rut_TI) {
-        this.rut_TI = rut_TI;
+    public void setRutTI(String rutTI) {
+        this.rutTI = rutTI;
     }
 
-    public Date getFecha_solicitud() {
+    public Date getFechaSolicitud() {
         return fechaSolicitud;
     }
 
-    public void setFecha_solicitud(Date fecha_solicitud) {
-        this.fechaSolicitud = fecha_solicitud;
+    public void setFechaSolicitud(Date fechaSolicitud) {
+        this.fechaSolicitud = fechaSolicitud;
     }
 
-    public Date getFecha_entrega() {
-        return fecha_entrega;
+    public Date getFechaEntrega() {
+        return fechaEntrega;
     }
 
-    public void setFecha_entrega(Date fecha_entrega) {
-        this.fecha_entrega = fecha_entrega;
+    public void setFechaEntrega(Date fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
     }
 
-    public Date getFecha_devolucion() {
-        return fecha_devolucion;
+    public Date getFechaDevolucion() {
+        return fechaDevolucion;
     }
 
-    public void setFecha_devolucion(Date fecha_devolucion) {
-        this.fecha_devolucion = fecha_devolucion;
+    public void setFechaDevolucion(Date fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
     }
 
     public EstadoDocumento getEstado() {
@@ -145,6 +149,16 @@ public class Documento {
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
     }
+
+    public TipoEquipo getTipoEquipo() {
+        return tipoEquipo;
+    }
+
+    public void setTipoEquipo(TipoEquipo tipoEquipo) {
+        this.tipoEquipo = tipoEquipo;
+    }
+    
+    
     
     
 }

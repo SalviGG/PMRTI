@@ -7,6 +7,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.model.entity.Documento;
 import com.example.demo.model.service.DocumentoService;
+import com.example.demo.model.service.TipoEquipoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +26,15 @@ public class SolicitudAsigEquipoController {
     @Autowired
     private DocumentoService docDao;
     
+    @Autowired
+    private TipoEquipoService tipoEquiDAO;
+    
+    
     @GetMapping("/creaSolicitud")
     public String crearSolicitud(Model model){
         
-        model.addAttribute("doc", new Documento());
+        model.addAttribute("listTipo", tipoEquiDAO.findAll());
+        model.addAttribute("Documento", new Documento());
         return "solicitudAsigEqui/crearSolicitudAsigEquipo";
     }
 

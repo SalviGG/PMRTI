@@ -5,10 +5,18 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <head th:include="plantilla/fragmentos :: head">
         
     </head>
     <body>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+        
         <aside id="left-panel" class="left-panel" th:include="plantilla/fragmentos :: aside">
             
         </aside>
@@ -21,7 +29,7 @@ and open the template in the editor.
             </div>
             <div class="content mt-3">
 
-                <div class="col-xl-6">
+                <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -37,33 +45,32 @@ and open the template in the editor.
                                 <!--/.col-->
                                 <div class="chart-wrapper mt-4" >
                                     <!--area de trabajo-->
-                                    <form>   
-                                        <input type="hidden" name="rutSoli" />
-                                        <input type="hidden" name="rutBen" />
-                                        <input type="hidden" name="rutTi" />
-                                        <input type="hidden" name="fechaSoli" />
-                                        <input type="hidden" name="fechaRe" />
-                                        <input type="hidden" name="fechaDebu" />
+                                    <form th:action="@{/equipo/form}" 
+                                          th:object="${Documento}" 
+                                          method="post" 
+                                          enctype="multipart/form-data" 
+                                          class="form-horizontal">   
                                         
                                         <div class="form-group">
-                                            <label for="testOrder" class="control-label">Tipo de equipo</label>
+                                            <label  for="testOrder" class="control-label">rut del receptor </label>
+                                            <div>
+                                                <input type="text" th:field="*{rutReceptor}" disabled="false" /> 
+                                                <input class="btn btn-primary" onclick="allUser();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
+                                                <input class="btn btn-primary" type="button" value="crear receptor transitorio " />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label  for="testOrder" class="control-label">Tipo de equipo</label>
                                             <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
                                                 <option value="">Tipo Equipo</option>
-                                                <option th:each="tipoEqui : ${listTipoEqui}"
+                                                <option th:each="tipoEqui : ${listTipo}"
                                                         th:value="${tipoEqui.id_tipo_equipo}"
                                                         th:text="${tipoEqui.nombre}"></option>
                                             </select>
                                         </div>
+                                                                
                                         
-                                        <div class="form-group">
-                                            <label for="testOrder" class="control-label">Tipo de equipo</label>
-                                            <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
-                                                <option value="">Tipo Equipo</option>
-                                                <option th:each="tipoEqui : ${listTipoEqui}"
-                                                        th:value="${tipoEqui.id_tipo_equipo}"
-                                                        th:text="${tipoEqui.nombre}"></option>
-                                            </select>
-                                        </div>
                                     </form>
                                     
                                 </div>
@@ -74,33 +81,6 @@ and open the template in the editor.
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">Equipos asignados</div>
-                                    <div class="stat-digit">260</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-layout-grid2 text-warning border-warning"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">Equipos en prestamo</div>
-                                    <div class="stat-digit">15</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
             
@@ -108,5 +88,66 @@ and open the template in the editor.
         <footer style="display: none" th:include="plantilla/fragmentos :: footer">
             
         </footer>
+        <div id="listadoModal" class="modal fade bd-example-modal-lg " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">buscar Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+              <div class="modal-content">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>
+                                  
+                              </th>
+                              <th>
+                                rut
+                              </th>
+                              <th>
+                                nombre
+                              </th>
+                                                            
+                          </tr>
+                      </thead>
+                      <tbody id="tablaUser" class="tablaUser">
+                          
+                      </tbody>
+                  </table>
+              </div>
+           </div>
+         </div>
+        
+
+        
+        
+        <script>
+            function allUser(){
+                
+                $.ajax({
+                    url: "http://localhost:8080/user/findall",
+                    method: "GET",                    
+                    dataType: "json"
+                  }).done( function (data){
+                      
+                      var con ="";
+                    for (var i = 0; i < data.length; i++) {
+                      
+                      con =con+ "<tr><td><input class='btn btn-primary' onclick='selecionar(\""+data[i].idUsuario+"\",\""+data[i].idNacional+"\");' type='button'  value='selecionar' /></td> <td>"+data[i].idNacional+"</td> <td>"+data[i].name+"</td> </tr>" ;
+                    }
+                    $("#tablaUser").html(con)
+              }) ;
+                
+            }
+            function selecionar(idUser,rut){
+                
+                $("#listadoModal").modal('hide');
+            }
+            
+            
+        </script>
+       
     </body>
 </html>
