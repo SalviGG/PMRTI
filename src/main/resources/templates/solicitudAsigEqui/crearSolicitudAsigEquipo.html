@@ -10,10 +10,7 @@ and open the template in the editor.
         
     </head>
     <body>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         
         <aside id="left-panel" class="left-panel" th:include="plantilla/fragmentos :: aside">
             
@@ -43,7 +40,8 @@ and open the template in the editor.
                                 <!--/.col-->
                                 <div class="chart-wrapper mt-4" >
                                     <!--area de trabajo-->
-                                    <form th:action="@{/equipo/form}" 
+                                    <div class="col-xl-12" id="principal" >
+                                    <form th:action="@{/solicitudAsig/creaSolicitud}" 
                                           th:object="${Documento}" 
                                           method="post" 
                                           enctype="multipart/form-data" 
@@ -52,8 +50,9 @@ and open the template in the editor.
                                         <div class="form-group">
                                             <label  for="testOrder" class="control-label">rut del receptor </label>
                                             <div>
-                                                <input type="text" th:field="*{rutReceptor}" disabled="false" /> 
-                                                <input class="btn btn-primary" onclick="allUser();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
+                                                <input th:field="*{rutReceptor}" id="id" type="hidden" />
+                                                <input type="text" id="rut" disabled="false" /> 
+                                                <input class="btn btn-primary"  onclick="allUser();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
                                                 <input class="btn btn-primary" type="button" value="crear receptor transitorio " />
                                             </div>
                                         </div>
@@ -67,10 +66,44 @@ and open the template in the editor.
                                                         th:text="${tipoEqui.nombre}"></option>
                                             </select>
                                         </div>
-                                                                
                                         
+                                                                
+                                        <input type="submit" value="enviar"/>
                                     </form>
-                                    
+                                    </div>
+                                    <div class="col-xl-12" id="listadoUser" style="display: none;" >
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Seleccionar
+                                                    </th>
+                                                    <th>
+                                                        Rut
+                                                    </th>
+                                                    <th>
+                                                        Nombre
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="user : ${listUsers}">
+                                                    <td>
+                                                        <input type="button" class="btn btn-primary" value="selecionar" th:onclick="'sel(\''+${user.idNacional}+'\',\''+${user.idUsuario}+'\');'" />
+                                                    </td>
+                                                    <td th:text="${user.idNacional}">
+                                                        
+                                                    </td>
+                                                    <td th:text="${user.name}">
+                                                        
+                                                    </td>                                                    
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-xl-12" id="listadoUser" >
+                                        
+                                    </div>
                                 </div>
                                 <!--/.col-->
                             </div><!--/.row-->
@@ -86,64 +119,22 @@ and open the template in the editor.
         <footer style="display: none" th:include="plantilla/fragmentos :: footer">
             
         </footer>
-        <div id="listadoModal" class="modal fade bd-example-modal-lg " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">buscar Usuario</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-              <div class="modal-content">
-                  <table>
-                      <thead>
-                          <tr>
-                              <th>
-                                  
-                              </th>
-                              <th>
-                                rut
-                              </th>
-                              <th>
-                                nombre
-                              </th>
-                                                            
-                          </tr>
-                      </thead>
-                      <tbody id="tablaUser" class="tablaUser">
-                          
-                      </tbody>
-                  </table>
-              </div>
-           </div>
-         </div>
-        
-
-        
-        
+                      
         <script>
+            function sel(rut,id){
+                
+                $("#rut").val(rut);
+                $("#id").val(id);
+                from();
+            }
             function allUser(){
-                
-                $.ajax({
-                    url: "http://localhost:8080/user/findall",
-                    method: "GET",                    
-                    dataType: "json"
-                  }).done( function (data){
-                      
-                      var con ="";
-                    for (var i = 0; i < data.length; i++) {
-                      
-                      con =con+ "<tr><td><input class='btn btn-primary' onclick='selecionar(\""+data[i].idUsuario+"\",\""+data[i].idNacional+"\");' type='button'  value='selecionar' /></td> <td>"+data[i].idNacional+"</td> <td>"+data[i].name+"</td> </tr>" ;
-                    }
-                    $("#tablaUser").html(con)
-              }) ;
-                
+                $("#principal").css("display","none");
+                $("#listadoUser").css("display","block");
             }
-            function selecionar(idUser,rut){
-                
-                $("#listadoModal").modal('hide');
+            function from(){
+                $("#listadoUser").css("display","none");
+                $("#principal").css("display","block");
             }
-            
             
         </script>
        

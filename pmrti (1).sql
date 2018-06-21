@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-06-2018 a las 04:09:01
--- Versión del servidor: 10.1.31-MariaDB
--- Versión de PHP: 7.2.4
+-- Tiempo de generación: 22-06-2018 a las 00:55:38
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,16 +31,24 @@ SET time_zone = "+00:00";
 CREATE TABLE `documento` (
   `id_documento` int(11) NOT NULL,
   `rut_solicitante` int(11) NOT NULL,
-  `rut_receptor` varchar(20) NOT NULL,
-  `rut_TI` int(11) NOT NULL,
+  `rut_receptor` varchar(20) DEFAULT NULL,
+  `rut_TI` int(11) DEFAULT NULL,
   `fecha_solicitud` date NOT NULL,
-  `fecha_entrega` date NOT NULL,
-  `fecha_devolucion` date NOT NULL,
+  `fecha_entrega` date DEFAULT NULL,
+  `fecha_devolucion` date DEFAULT NULL,
   `estado` int(11) NOT NULL,
-  `tipo_documento` varchar(3) NOT NULL,
-  `id_equipo` int(11) NOT NULL,
+  `tipo_documento` varchar(3) DEFAULT NULL,
+  `id_equipo` int(11) DEFAULT NULL,
   `id_tipo_Equipo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `documento`
+--
+
+INSERT INTO `documento` (`id_documento`, `rut_solicitante`, `rut_receptor`, `rut_TI`, `fecha_solicitud`, `fecha_entrega`, `fecha_devolucion`, `estado`, `tipo_documento`, `id_equipo`, `id_tipo_Equipo`) VALUES
+(1, 1, '1', NULL, '2018-06-19', NULL, NULL, 1, NULL, NULL, 2),
+(2, 1, '2', NULL, '2018-06-20', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -138,12 +146,15 @@ INSERT INTO `tipo_equipo` (`id_tipo_equipo`, `nombre`) VALUES
 --
 
 CREATE TABLE `tmp_usuario` (
-  `ID_RUT` varchar(60) NOT NULL,
-  `nombre` varchar(60) NOT NULL,
-  `apellido_paterno` varchar(60) NOT NULL,
-  `apellido_materno` varchar(60) NOT NULL,
-  `departamento` varchar(60) NOT NULL,
-  `email` varchar(100) NOT NULL
+  `id_Usuario` int(11) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `passwer` varchar(60) NOT NULL,
+  `last_Name` varchar(60) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `birthdate` date NOT NULL,
+  `idNacional` varchar(60) NOT NULL,
+  `estado` varchar(3) NOT NULL,
+  `departamento` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -189,7 +200,7 @@ ALTER TABLE `tipo_equipo`
 -- Indices de la tabla `tmp_usuario`
 --
 ALTER TABLE `tmp_usuario`
-  ADD PRIMARY KEY (`ID_RUT`);
+  ADD PRIMARY KEY (`id_Usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -199,7 +210,7 @@ ALTER TABLE `tmp_usuario`
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`
-  MODIFY `id_documento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
@@ -218,6 +229,12 @@ ALTER TABLE `estado_documento`
 --
 ALTER TABLE `tipo_equipo`
   MODIFY `id_tipo_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `tmp_usuario`
+--
+ALTER TABLE `tmp_usuario`
+  MODIFY `id_Usuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

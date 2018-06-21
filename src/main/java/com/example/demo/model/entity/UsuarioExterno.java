@@ -6,21 +6,47 @@
 package com.example.demo.model.entity;
 
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Asus
  */
+//	tmp_usuario
+@Entity
+@Table(name = "tmp_usuario")
 public class UsuarioExterno {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_documento")
     private int idUsuario;
+    
     private String email;
+    
     private String passwer;
+    
+    @Column(name="last_name")
     private String lastName;
+    
     private String name;
+    
+    
+    @Temporal(TemporalType.DATE)
     private Date birthdate;
+    
+    @Column(name= "id_nacional")
     private String idNacional;
+    
     private String estado;
+    
     private String departamento;
     
     public UsuarioExterno(){

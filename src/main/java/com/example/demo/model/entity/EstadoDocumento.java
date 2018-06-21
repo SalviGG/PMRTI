@@ -22,6 +22,7 @@ public class EstadoDocumento {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_estado")
     private int id;
     
     @Column(name = "desc_estado")
