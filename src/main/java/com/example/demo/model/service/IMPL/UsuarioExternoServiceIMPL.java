@@ -6,12 +6,14 @@
 package com.example.demo.model.service.IMPL;
 
 import com.example.demo.Usuario;
+import com.example.demo.model.DAO.IUsuarioExterno;
 import com.example.demo.model.entity.UsuarioExterno;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.service.UsuarioExternoService;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -19,7 +21,9 @@ import java.util.ArrayList;
  */
 @Service
 public class UsuarioExternoServiceIMPL  implements UsuarioExternoService{
-
+    @Autowired
+    private IUsuarioExterno userDAO;
+    
     @Override
     public List<UsuarioExterno> findAll() {
         List<UsuarioExterno> list = new ArrayList<>();
@@ -43,6 +47,13 @@ public class UsuarioExternoServiceIMPL  implements UsuarioExternoService{
             }
         } catch (Exception ex) {
             
+        }
+        
+        List<UsuarioExterno> local = (List<UsuarioExterno>)userDAO.findAll();
+        
+        
+        for (UsuarioExterno usuarioExterno : local) {
+            list.add(usuarioExterno);
         }
         return list;
     }
@@ -73,10 +84,11 @@ public class UsuarioExternoServiceIMPL  implements UsuarioExternoService{
         }
         return user;
     }
-
+    
+    
     @Override
     public UsuarioExterno findOne(String idNacional) {
-        UsuarioExterno user = new UsuarioExterno();
+        UsuarioExterno user = null;
         try { // Call Web Service Operation
             com.example.demo.Usuarios_Service service = new com.example.demo.Usuarios_Service();
             com.example.demo.Usuarios port = service.getUsuariosPort();
@@ -84,19 +96,28 @@ public class UsuarioExternoServiceIMPL  implements UsuarioExternoService{
             
             // TODO process result here
             com.example.demo.Usuario result = port.findIdNacional(idNacional);
-            user = new UsuarioExterno();
             
-            user.setIdUsuario(result.getIdUsuario());
-            user.setEmail(result.getEmail());
-            user.setPasswer(result.getPasswer());
-            user.setLastName(result.getLastName());
-            user.setName(result.getName());
-            user.setIdNacional(result.getIdNacional());
-            user.setEstado(result.getEstado());
-            user.setDepartamento(result.getDepartament());
+            
+            if(result.getIdUsuario() > 0){
+                
+                user = new UsuarioExterno();                
+                user.setIdUsuario(result.getIdUsuario());
+                user.setEmail(result.getEmail());
+                user.setPasswer(result.getPasswer());
+                user.setLastName(result.getLastName());
+                user.setName(result.getName());
+                user.setIdNacional(result.getIdNacional());
+                user.setEstado(result.getEstado());
+                user.setDepartamento(result.getDepartament());
+            } 
         } catch (Exception ex) {
             // TODO handle custom exceptions here
         }
+        
+        if(user == null){ 
+            user = userDAO.findByIdNacional(idNacional);
+        }
+        
         return user;
     }
 

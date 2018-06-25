@@ -26,7 +26,7 @@ public class UsuarioExterno {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_documento")
+    @Column(name = "id_usuario")
     private int idUsuario;
     
     private String email;
@@ -42,7 +42,7 @@ public class UsuarioExterno {
     @Temporal(TemporalType.DATE)
     private Date birthdate;
     
-    @Column(name= "id_nacional")
+    @Column(name= "idnacional")
     private String idNacional;
     
     private String estado;
