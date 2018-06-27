@@ -7,6 +7,7 @@ package com.example.demo.model.service.IMPL;
 
 import com.example.demo.model.DAO.IEquipo;
 import com.example.demo.model.entity.Equipo;
+import com.example.demo.model.entity.TipoEquipo;
 import com.example.demo.model.service.EquipoService;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +43,19 @@ public class EquipoServiceIMPL implements EquipoService{
     public void delete(int id) {
         equipoDAO.deleteById(id);
     }
+
+    @Override
+    public List<Equipo> findAllForGroup(int group) {
+             
+        return equipoDAO.findByGroup(group);
+    }
+
+    @Override
+    public List<Equipo> findByGroupAndTipo(int group, TipoEquipo tipo) {
+        return equipoDAO.findByGroupAndTipo(group, tipo);
+    }
+    
+    
 
     
     

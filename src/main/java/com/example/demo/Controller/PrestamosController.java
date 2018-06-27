@@ -6,13 +6,13 @@
 package com.example.demo.Controller;
 
 import com.example.demo.model.entity.Documento;
-import com.example.demo.model.entity.Equipo;
+import com.example.demo.model.entity.RelacionDocumentoUserExterno;
 import com.example.demo.model.entity.UsuarioExterno;
 import com.example.demo.model.service.DocumentoService;
 import com.example.demo.model.service.EstadoDocumentoService;
 import com.example.demo.model.service.TipoEquipoService;
-import com.example.demo.model.service.UsuarioExternoService;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,50 +26,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author usuario
  */
-
 @Controller
-@RequestMapping("/solicitudAsig")
-public class SolicitudAsigEquipoController {
-
+@RequestMapping("/prestamo")
+public class PrestamosController {
+    
     @Autowired
-    private DocumentoService docDao;
+    private DocumentoService docDAO;
     
     @Autowired
     private TipoEquipoService tipoEquiDAO;
     
-    @Autowired
-    private UsuarioExternoService userEctDAO;
+    @Autowired  
+    private EstadoDocumentoService tipoEstaDocService;
     
-    @Autowired
-    private EstadoDocumentoService estaDocDAO;
-    
-    @GetMapping("/creaSolicitud")
-    public String crearSolicitud(Model model){
-        
-        model.addAttribute("listUsers", userEctDAO.findAll());
+    @GetMapping("/pedirPrestamo")
+    public String pedirPrestamo( Model model ){
         model.addAttribute("listTipo", tipoEquiDAO.findAll());
         model.addAttribute("Documento", new Documento());
-        return "solicitudAsigEqui/crearSolicitudAsigEquipo";
-    }
-    @PostMapping("/creaSolicitud")
-    public String saveDocumen(@Valid Documento doc , Model mode , HttpSession session){
-        UsuarioExterno user = (UsuarioExterno)session.getAttribute("usuario");
-        System.out.println(doc.getRutReceptor());
-        doc.setRutSolicitante(user.getIdNacional());
-        doc.setFechaSolicitud(new Date());
-        doc.setEstado(estaDocDAO.findOne(1));
-        doc.setTipoDocumento("SL");
-        docDao.save(doc);
-        
-        return"redirect:/index";
+        return "prestamo/pedirPrestamo";
     }
     
-    @GetMapping("/listaSoliAsig")
-    public String listarSolic(Model model ,HttpSession session){
+    @PostMapping("/pedirPrestamo")
+    public String guardarPrestamo(@Valid Documento doc, HttpSession session){
         
-        UsuarioExterno user = (UsuarioExterno) session.getAttribute("usuario");
-        model.addAttribute("lisDocum", docDao.findAllWithRelacionForSolicitante(user.getIdNacional(),"SL"));
+        UsuarioExterno user = (UsuarioExterno)session.getAttribute("usuario");
+        doc.setRutSolicitante(user.getIdNacional());
+        doc.setRutReceptor(user.getIdNacional());
+        doc.setFechaSolicitud(new Date());
+        doc.setTipoDocumento("PR");
+        doc.setEstado(tipoEstaDocService.findOne(1));
+                
+        docDAO.save(doc);
         
-        return "solicitudAsigEqui/listaSoliAsig";
+        return "redirect:/index";
     }
+    
+    @GetMapping("/listar")
+    public String listarPrestamos(HttpSession session,Model model){
+        UsuarioExterno user = (UsuarioExterno)session.getAttribute("usuario");
+        List<RelacionDocumentoUserExterno> list = docDAO.findAllWithRelacionForSolicitante(user.getIdNacional(), "PR");
+        
+        model.addAttribute("lisDocum", list);
+        
+    
+        return "prestamo/listar";
+    }
+    
+    
+    
 }

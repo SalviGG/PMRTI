@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> 
+    
+    <head th:include="plantilla/fragmentos :: head">
+        
+    </head>
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <aside id="left-panel" class="left-panel" th:include="plantilla/fragmentos :: aside">
+            
+        </aside>
+        <div id="right-panel" class="right-panel">
+            <header id="header" class="header" th:include="plantilla/fragmentos :: header">
+                
+            </header>
+            <div class="breadcrumbs" th:include="plantilla/fragmentos :: breadcrumds" >
+                
+            </div>
+            <div class="content mt-3">
+
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h4 class="card-title mb-0">Solcitar asignacion de equipo</h4>
+                                    <div class="small text-muted">formulario</div>
+                                </div>
+                                <!--/.col-->
+                                <!--/.col-->
+                            <div class="col-sm-8 hidden-sm-down">
+                                
+                            </div>
+                                <!--/.col-->
+                                <div class="chart-wrapper mt-4" >
+                                    <!--area de trabajo-->
+                                    <div class="col-xl-12" id="principal" >
+                                    <form th:action="@{/entrega/entregar}" 
+                                          th:object="${Documento}" 
+                                          method="post" 
+                                          enctype="multipart/form-data" 
+                                          class="form-horizontal">   
+                                        <input type="hidden" th:field="*{id}" th:value="${doc.doc.id}" />
+                                        <input type="hidden" th:field="*{tipoEquipo}" th:value="${doc.doc.tipoEquipo.id_tipo_equipo}" />
+                                        <input type="hidden" th:field="*{tipoDocumento}" th:value="${doc.doc.tipoDocumento}" />
+                                        
+                                        
+                                        <div class="form-group">
+                                            <label  for="testOrder" class="control-label">Rut del Solicitante </label>
+                                            <div>
+                                                <input th:field="*{rutSolicitante}" th:value="${doc.doc.rutSolicitante}"  type="hidden" />
+                                                <input type="text" id="rut" th:value="${doc.doc.rutSolicitante}" disabled="false" /> 
+                                                <span th:text="${doc.solicitante.name}+' '+${doc.solicitante.lastName}" ></span>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  for="testOrder" class="control-label">Rut del Receptor </label>
+                                            <div>
+                                                <input th:field="*{rutReceptor}" th:value="${doc.doc.rutReceptor}"  type="hidden" />
+                                                <input type="text" id="rut" th:value="${doc.doc.rutReceptor}" disabled="false" /> 
+                                                <span th:text="${doc.receptor.name}+' '+${doc.receptor.lastName}" ></span>
+                                                <!--<input class="btn btn-primary"  onclick="allUser();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
+                                                <input class="btn btn-primary" type="button" value="crear receptor transitorio " />-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">                                            
+                                            <label  for="testOrder" th:text=" 'Tipo equipo solicitado '+${doc.doc.tipoEquipo.nombre} " class="control-label">Rut del Receptor </label>
+                                        </div>
+                                        <div class="form-group">                                            
+                                            <label  for="testOrder"  class="control-label">Datos equipo</label>
+                                             <div>
+                                                 <input th:field="*{equipo}" id="equipo" type="hidden" />
+                                                
+                                                <span id="equipoDes" > </span><input class="btn btn-primary"  onclick="verEquipo();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
+                                                <!--<input class="btn btn-primary"  onclick="allUser();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
+                                                <input class="btn btn-primary" type="button" value="crear receptor transitorio " />-->
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <input type="submit" class="btn btn-primary" value="enviar"/>
+                                    </form>
+                                    </div>
+                                    
+                                    <div class="col-xl-12 " id="listadoEquipo" style="display: none;">
+                                        <table class="col-xl-12">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <th>
+                                                        tipo
+                                                    </th>
+                                                    <th>
+                                                        Serie
+                                                    </th>
+                                                    <th>
+                                                        numero interno
+                                                    </th>
+                                                    <th>
+                                                        marca
+                                                    </th>
+                                                    <th>
+                                                        modelo
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="equi : ${listEquipoDis}">
+                                                    <td>
+                                                        <input type="button" class="btn btn-primary" th:onclick="'sel(\''+${equi.id_equipo}+'\',\''+${equi.tipoEquipo.nombre}+'\',\''+${equi.cod_interno}+'\',\''+${equi.marca}+'\',\''+${equi.modelo}+'\');'" value="seleccionar"  /> 
+                                                    </td>
+                                                    <td th:text="${equi.tipoEquipo.nombre}" >
+                                                        
+                                                    </td>
+                                                    <td th:text="${equi.serie}" >
+                                                        
+                                                    </td>
+                                                    <td th:text="${equi.cod_interno}" >
+                                                        
+                                                    </td>
+                                                    <td th:text="${equi.marca}" >
+                                                        
+                                                    </td>
+                                                    <td th:text="${equi.modelo}" >
+                                                        
+                                                    </td>                                                   
+                                                    
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!--/.col-->
+                            </div><!--/.row-->
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+        </div>
+        <footer style="display: none" th:include="plantilla/fragmentos :: footer">
+            
+        </footer>
+                      
+        <script>
+            function verEquipo(){
+                $("#principal").css("display","none");
+                $("#listadoEquipo").css("display","block");
+            }
+            function sel(idEquipo,tipoEquipo,interCod,marca,modelo){
+                
+                $("#equipo").val(idEquipo);
+                $("#equipoDes").html(tipoEquipo+"-"+interCod+"-"+marca+"-"+modelo);
+                from();
+            }
+            function allUser(){
+                $("#principal").css("display","none");
+                $("#listadoUser").css("display","block");
+            }
+            function from(){
+                $("#listadoEquipo").css("display","none");
+                $("#principal").css("display","block");
+            }
+            
+        </script>
+       
+    </body>
+</html>

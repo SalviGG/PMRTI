@@ -32,7 +32,7 @@ public class Documento {
     private int id;
     
     @Column(name = "rut_solicitante")
-    private  Integer rutSolicitante;
+    private  String rutSolicitante;
     
     @Column(name = "rut_receptor")
     private  String rutReceptor;
@@ -78,11 +78,11 @@ public class Documento {
         this.id = id;
     }
 
-    public Integer getRutSolicitante() {
+    public String getRutSolicitante() {
         return rutSolicitante;
     }
 
-    public void setRutSolicitante(Integer rutSolicitante) {
+    public void setRutSolicitante(String rutSolicitante) {
         this.rutSolicitante = rutSolicitante;
     }
 

@@ -66,21 +66,27 @@ and open the template in the editor.
                         <li th:href="@{index}" th:if="${session.usuario.departamento}== 'RRHH' or ${session.usuario.departamento}== 'TI'  or ${session.usuario.departamento} == 'ADM'  " class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Prestamos</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><a th:href="@{//form}">Solicilar Prestamo</a></li>
-                                <li><i class="fa fa-bars"></i><a th:href="@{/equipo/listar}"> Listar Solicitudes Prestamo</a></li>                                                                
+                                <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/prestamo/pedirPrestamo}">Solicilar Prestamo</a></li>
+                                <li><i class="fa fa-bars"></i><a th:href="@{/prestamo/listar}"> Listar Solicitudes Prestamo</a></li>                                                                
                             </ul>
                         </li>
                         <li th:href="@{index}" th:if="${session.usuario.departamento}== 'TI' or ${session.usuario.departamento}== 'ADM' " class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Entregas</a>
                             <ul class="sub-menu children dropdown-menu">                                
-                                <li><i class="fa fa-bars"></i><a th:href="@{/equipo/listar}"> Listar Solicitudes</a></li>                                                                
+                                <li><i class="fa fa-bars"></i><a th:href="@{/entrega/listarSolicitudEstado}"> Listar Solicitudes pendientes</a></li>                                                                
                             </ul>
                         </li>
                         <li th:href="@{index}" th:if="${session.usuario.departamento}== 'TI' or ${session.usuario.departamento}== 'ADM' " class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>recepcion de equipos</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Recepción de Equipos</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/equipo/form}">recepcion de equipo</a></li>
-                                <li><i class="fa fa-bars"></i><a th:href="@{/equipo/listar}"> Listar Equipos Pendiente de Entrega</a></li>                                                                
+                                <li><i class="fa fa-bars"></i><a th:href="@{/devolucion/listar}"> Listar Equipos Pendiente de Devolución</a></li>                                                                
+                            </ul>
+                        </li>
+                        <li th:href="@{index}" th:if="${session.usuario.departamento}== 'TI' or ${session.usuario.departamento}== 'ADM' " class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Administracion Equipos</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/equipo/form}">Crear Equipos</a></li>
+                                <li><i class="fa fa-bars"></i><a th:href="@{/equipo/listar}"> Listar Equipos  </a></li>                                                                
                             </ul>
                         </li>
                         
