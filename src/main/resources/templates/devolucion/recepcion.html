@@ -75,10 +75,40 @@ and open the template in the editor.
                                         </div>
                                         <div class="form-group">                                            
                                             <label  for="testOrder"  class="control-label">Datos equipo</label>
-                                             <div>
-                                                 <input th:field="*{equipo}" id="equipo" type="hidden" />
+                                             <div> <!--"'sel(\''+${equi.id_equipo}+'\',\''+${equi.tipoEquipo.nombre}+'\',\''+${equi.cod_interno}+'\',\''+${equi.marca}+'\',\''+${equi.modelo}+'\')-->
+                                                 <input th:field="*{equipo}" th:value="doc.doc.equipo.id_equipo" id="equipo" type="hidden" />
+                                                 <table style="width: 100%;">
+                                                     <tbody>
+                                                         <tr>
+                                                             <th colspan="4"><span th:text="'Número Series: '+${doc.doc.equipo.serie}"></span></th>
+                                                         </tr>
+                                                         <tr>
+                                                             <th>
+                                                                 Marca:
+                                                             </th>
+                                                             <td>
+                                                                 <span th:text="${doc.doc.equipo.marca}" ></span>
+                                                             </td>
+                                                             <th>
+                                                                 modelo:
+                                                             </th>
+                                                             <td>
+                                                                 <span th:text="${doc.doc.equipo.modelo}" ></span>
+                                                             </td>
+                                                         </tr>
+                                                         
+                                                     </tbody>
+                                                 </table>
+                                                 <div class="form-group">
+                                            <label for="testOrder" class="control-label">Estado del esquipo</label>
+                                            <select th:field="*{equipo.estado}" class="form-control"   >
+                                                <option value="">estado</option>
+                                                <option th:each="estado : ${listEstado}"
+                                                        th:value="${estado.id}"
+                                                        th:text="${estado.descEstado}"></option>
+                                            </select>
+                                        </div>
                                                 
-                                                <span id="equipoDes" > </span><input class="btn btn-primary"  onclick="verEquipo();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
                                                 <!--<input class="btn btn-primary"  onclick="allUser();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
                                                 <input class="btn btn-primary" type="button" value="crear receptor transitorio " />-->
                                             </div>
@@ -89,56 +119,6 @@ and open the template in the editor.
                                         </a>
                                         <input type="submit" class="btn btn-primary" value="enviar"/>
                                     </form>
-                                    </div>
-                                    
-                                    <div class="col-xl-12 " id="listadoEquipo" style="display: none;">
-                                        <table class="col-xl-12">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        
-                                                    </th>
-                                                    <th>
-                                                        tipo
-                                                    </th>
-                                                    <th>
-                                                        Serie
-                                                    </th>
-                                                    <th>
-                                                        numero interno
-                                                    </th>
-                                                    <th>
-                                                        marca
-                                                    </th>
-                                                    <th>
-                                                        modelo
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr th:each="equi : ${listEquipoDis}">
-                                                    <td>
-                                                        <input type="button" class="btn btn-primary" th:onclick="'sel(\''+${equi.id_equipo}+'\',\''+${equi.tipoEquipo.nombre}+'\',\''+${equi.cod_interno}+'\',\''+${equi.marca}+'\',\''+${equi.modelo}+'\');'" value="seleccionar"  /> 
-                                                    </td>
-                                                    <td th:text="${equi.tipoEquipo.nombre}" >
-                                                        
-                                                    </td>
-                                                    <td th:text="${equi.serie}" >
-                                                        
-                                                    </td>
-                                                    <td th:text="${equi.cod_interno}" >
-                                                        
-                                                    </td>
-                                                    <td th:text="${equi.marca}" >
-                                                        
-                                                    </td>
-                                                    <td th:text="${equi.modelo}" >
-                                                        
-                                                    </td>                                                   
-                                                    
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
                                 <!--/.col-->

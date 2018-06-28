@@ -71,6 +71,15 @@ public class EntregaController {
         
         return"entrega/entrega";
     }
+    
+    @GetMapping("/rechazar/{id}")
+    public String rechazar(@PathVariable int id , Model model){
+        RelacionDocumentoUserExterno doc = docDAO.findOneWithRelacion(id);
+        doc.getDoc().setEstado(estDocDAO.findOne(6));
+        docDAO.save(doc.getDoc());
+        return"redirect:/entrega/listarSolicitudEstado";
+    }
+    
     @PostMapping("entregar")
     public String dejarEntrega(@Valid Documento doc,HttpSession session){
         
@@ -82,9 +91,7 @@ public class EntregaController {
             docAnt.getEquipo().setEstado(estaEquiDAO.findOne(4).orElse(null));
         }else{
             docAnt.getEquipo().setEstado(estaEquiDAO.findOne(3).orElse(null));
-        }
-        
-        
+        }        
         docAnt.setEstado(estDocDAO.findOne(5));
         UsuarioExterno user = (UsuarioExterno)session.getAttribute("usuario");
         docAnt.setRutTI(user.getIdNacional());

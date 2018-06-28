@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-06-2018 a las 00:55:38
+-- Tiempo de generación: 28-06-2018 a las 05:43:29
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `documento` (
   `id_documento` int(11) NOT NULL,
-  `rut_solicitante` int(11) NOT NULL,
+  `rut_solicitante` varchar(11) NOT NULL,
   `rut_receptor` varchar(20) DEFAULT NULL,
-  `rut_TI` int(11) DEFAULT NULL,
+  `rut_TI` varchar(11) DEFAULT NULL,
   `fecha_solicitud` date NOT NULL,
   `fecha_entrega` date DEFAULT NULL,
   `fecha_devolucion` date DEFAULT NULL,
@@ -47,8 +47,13 @@ CREATE TABLE `documento` (
 --
 
 INSERT INTO `documento` (`id_documento`, `rut_solicitante`, `rut_receptor`, `rut_TI`, `fecha_solicitud`, `fecha_entrega`, `fecha_devolucion`, `estado`, `tipo_documento`, `id_equipo`, `id_tipo_Equipo`) VALUES
-(1, 1, '1', NULL, '2018-06-19', NULL, NULL, 1, NULL, NULL, 2),
-(2, 1, '2', NULL, '2018-06-20', NULL, NULL, 1, NULL, NULL, 1);
+(3, '17118537', '1231412', '17118537', '2018-06-25', '2018-06-27', NULL, 5, 'SL', 1, 1),
+(4, '17118537', '17118537', NULL, '2018-06-25', NULL, NULL, 1, 'SL', NULL, 3),
+(9, '17118537', '17118537', NULL, '2018-06-25', NULL, NULL, 1, 'PR', NULL, 1),
+(10, '17118537', '17118537', NULL, '2018-06-25', NULL, NULL, 6, 'PR', NULL, 1),
+(11, '17118537', '17118537', NULL, '2018-06-26', NULL, NULL, 1, 'SL', NULL, 1),
+(12, '17118537', '17118537', NULL, '2018-06-26', NULL, NULL, 1, 'PR', NULL, 1),
+(13, '17118537', '17118537', NULL, '2018-06-27', NULL, NULL, 1, 'PR', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -71,9 +76,16 @@ CREATE TABLE `equipo` (
 --
 
 INSERT INTO `equipo` (`id_equipo`, `id_tipo_equipo`, `serie`, `cod_interno`, `marca`, `modelo`, `estado`) VALUES
-(1, 1, 'PC-6070', 'PC-001', 'HP', 'HP-539', 1),
+(1, 1, 'PC-6070', 'PC-001', 'HP', 'HP-539', 4),
 (2, 2, 'NT-251', 'NOTE-001', 'HP', 'HP-100', 2),
-(3, 1, '101', 'cd-100', 'hp', 'hp-100', 4);
+(3, 1, '101', 'CP-100', 'HP', 'HP-100', 4),
+(4, 2, 'USM-2024', 'CP-30', 'HP', 'HP-2012', 0),
+(5, 1, '0001', 'CP-001', 'HP', 'HP-539', 1),
+(6, 1, '002', 'CP-002', 'HP', 'HP-539', 1),
+(7, 2, '003', 'CP-003', 'ASUS', 'ASUS-552', 1),
+(8, 2, '004', 'CP-004', 'ASUS', 'ASUS-552', 1),
+(9, 2, '005', 'CP-005', 'ASUS', 'ASUS-552', 1),
+(10, 3, '005', 'CP-005', 'HP', 'HP-256', 1);
 
 -- --------------------------------------------------------
 
@@ -95,7 +107,9 @@ INSERT INTO `estado_documento` (`id_estado`, `desc_estado`, `grupo`) VALUES
 (1, 'solicitud', 1),
 (2, 'espera', 1),
 (3, 'pendiente', 2),
-(4, 'detenido', 2);
+(4, 'detenido', 2),
+(5, 'entregado', 2),
+(6, 'rechazado', 2);
 
 -- --------------------------------------------------------
 
@@ -114,6 +128,7 @@ CREATE TABLE `estado_equipo` (
 --
 
 INSERT INTO `estado_equipo` (`id_estado_equipo`, `desc_estado`, `grupo`) VALUES
+(0, 'en limpieza', 1),
 (1, 'disponible', 1),
 (2, 'En mantenimiento', 3),
 (3, 'En prestamo', 3),
@@ -210,19 +225,19 @@ ALTER TABLE `tmp_usuario`
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`
-  MODIFY `id_documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_documento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `estado_documento`
 --
 ALTER TABLE `estado_documento`
-  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_equipo`
