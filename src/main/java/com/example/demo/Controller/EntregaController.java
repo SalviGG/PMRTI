@@ -64,10 +64,11 @@ public class EntregaController {
     @GetMapping("/entregar/{id}")
     public String entregar(@PathVariable int id , Model model){
         RelacionDocumentoUserExterno doc = docDAO.findOneWithRelacion(id);
+        System.out.println(doc.getDoc().getId()+" "+id+" ");
         model.addAttribute("doc",doc);
         
         model.addAttribute("listEquipoDis", equipoDAO.findByGroupAndTipo(1,doc.getDoc().getTipoEquipo()));
-        model.addAttribute("Documento", docDAO.findOne(id));
+        model.addAttribute("Documento", doc.getDoc());
         
         return"entrega/entrega";
     }

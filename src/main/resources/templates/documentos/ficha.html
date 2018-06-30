@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> 
+    
+    <head th:include="plantilla/fragmentos :: head">
+        
+    </head>
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <aside id="left-panel" class="left-panel" th:include="plantilla/fragmentos :: aside">
+            
+        </aside>
+        <div id="right-panel" class="right-panel">
+            <header id="header" class="header" th:include="plantilla/fragmentos :: header">
+                
+            </header>
+            <div class="breadcrumbs" th:include="plantilla/fragmentos :: breadcrumds" >
+                
+            </div>
+            <div class="content mt-3">
+
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h4 class="card-title mb-0">Solcitar asignacion de equipo</h4>
+                                    <div class="small text-muted">formulario</div>
+                                </div>
+                                <!--/.col-->
+                                <!--/.col-->
+                            <div class="col-sm-8 hidden-sm-down">
+                                
+                            </div>
+                                <!--/.col-->
+                                <div class="chart-wrapper mt-4 col-xl-6" >
+                                    <!--area de trabajo-->
+                                    <div class="col-xl-12" id="principal" >
+                                        <table class="col-xl-12">
+                                            <thead>
+                                                <tr>                                                    
+                                                    <th colspan="2">
+                                                        Nombre Recepción:
+                                                    </th>
+                                                    <td colspan="2"  th:text="' '+${doc.receptor.name}+' '+${doc.receptor.lastName}">
+
+                                                    </td>
+                                                    <th colspan="2">
+                                                        Departamento:
+                                                    </th>
+                                                    <td colspan="2"  th:text="' '+${doc.receptor.departamento}">
+
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th colspan="8" th:text=" 'Tipo equipo: '+${doc.doc.tipoEquipo.nombre} " ></th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2">
+                                                        Marca:
+                                                    </th>
+                                                    <td th:text="${doc.doc.equipo.marca}" colspan="2">
+                                                        
+                                                    </td>
+                                                    <th colspan="2">
+                                                        modelo:
+                                                    </th>
+                                                    <td th:text="${doc.doc.equipo.modelo}" colspan="2">
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2">
+                                                        Numero Serial:
+                                                    </th>
+                                                    <td th:text="${doc.doc.equipo.serie}" colspan="2">
+                                                        
+                                                    </td>
+                                                    <th colspan="2">
+                                                        Codigo Interno:
+                                                    </th>
+                                                    <td th:text="${doc.doc.equipo.cod_interno}" colspan="2">
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="4">
+                                                        fecha de entrega:
+                                                    </th>
+                                                    <td th:text="${doc.doc.fechaEntrega}" colspan="4">
+                                                        
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                        
+                                        </div>                                                
+                                                <!--<input class="btn btn-primary"  onclick="allUser();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
+                                                <input class="btn btn-primary" type="button" value="crear receptor transitorio " />-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/.col-->
+                            </div><!--/.row-->
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+        </div>
+        <footer style="display: none" th:include="plantilla/fragmentos :: footer">
+            
+        </footer>
+                      
+        <script>
+            function verEquipo(){
+                $("#principal").css("display","none");
+                $("#listadoEquipo").css("display","block");
+            }
+            function sel(idEquipo,tipoEquipo,interCod,marca,modelo){
+                
+                $("#equipo").val(idEquipo);
+                $("#equipoDes").html(tipoEquipo+"-"+interCod+"-"+marca+"-"+modelo);
+                from();
+            }
+            function allUser(){
+                $("#principal").css("display","none");
+                $("#listadoUser").css("display","block");
+            }
+            function from(){
+                $("#listadoEquipo").css("display","none");
+                $("#principal").css("display","block");
+            }
+            
+        </script>
+       
+    </body>
+</html>

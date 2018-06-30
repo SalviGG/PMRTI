@@ -63,7 +63,7 @@ and open the template in the editor.
                             </ul>
                         </li>
                         
-                        <li th:href="@{index}" th:if="${session.usuario.departamento}== 'RRHH' or ${session.usuario.departamento}== 'TI'  or ${session.usuario.departamento} == 'ADM'  " class="menu-item-has-children dropdown">
+                        <li th:href="@{index}"  class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Prestamos</a>
                             <ul class="sub-menu children dropdown-menu">
                                 <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/prestamo/pedirPrestamo}">Solicilar Prestamo</a></li>
@@ -147,7 +147,7 @@ and open the template in the editor.
 
                                 <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
 
-                                <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                                <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Logout</a>
                             </div>
                         </div>
                     </div>

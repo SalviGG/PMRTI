@@ -41,7 +41,7 @@ and open the template in the editor.
                                 <div class="chart-wrapper mt-4" >
                                     <!--area de trabajo-->
                                     <div class="col-xl-12" id="principal" >
-                                    <form th:action="@{/entrega/entregar}" 
+                                    <form th:action="@{/devolucion/recepcion}" 
                                           th:object="${Documento}" 
                                           method="post" 
                                           enctype="multipart/form-data" 
@@ -103,20 +103,18 @@ and open the template in the editor.
                                             <label for="testOrder" class="control-label">Estado del esquipo</label>
                                             <select th:field="*{equipo.estado}" class="form-control"   >
                                                 <option value="">estado</option>
-                                                <option th:each="estado : ${listEstado}"
+                                                <option  th:each="estado : ${listEstado}"
                                                         th:value="${estado.id}"
-                                                        th:text="${estado.descEstado}"></option>
+                                                        th:text="${estado.descEstado}"
+                                                        th:selected="(${doc.doc.equipo.estado.id == estado.id})"
+                                                        ></option>
                                             </select>
-                                        </div>
-                                                
+                                        </div>                                                
                                                 <!--<input class="btn btn-primary"  onclick="allUser();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
                                                 <input class="btn btn-primary" type="button" value="crear receptor transitorio " />-->
                                             </div>
-                                        </div>
+                                        </div>                                        
                                         
-                                        <a th:href="${'/entrega/rechazar/'+docRel.doc.id}"> 
-                                            <button class="btn btn-primary" type="button">Rechazar</button>
-                                        </a>
                                         <input type="submit" class="btn btn-primary" value="enviar"/>
                                     </form>
                                     </div>

@@ -57,6 +57,9 @@ and open the template in the editor.
                                                     <th>
                                                         Estado
                                                     </th>
+                                                    <th>
+                                                        
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -73,7 +76,10 @@ and open the template in the editor.
                                                     </td>
                                                     <td th:text="${docRel.doc.estado.descEstado}">
                                                         
-                                                    </td>                                                    
+                                                    </td>      
+                                                    <td >
+                                                        <a th:href="'/document/ficha/'+${docRel.doc.id}" ><input class="btn btn-primary" type="button" value="Detalle"/></a>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>

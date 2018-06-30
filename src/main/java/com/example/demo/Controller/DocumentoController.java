@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -31,6 +32,15 @@ public class DocumentoController{
         model.addAttribute("listDoc",listDoc);
         
         return "documentos/listarDocumentos";
+    }
+    
+    @GetMapping("ficha/{id}")
+    public String ficha(@PathVariable int id ,Model model){
+    
+        model.addAttribute("doc",docService.findOneWithRelacion(id));
+        
+        return"documentos/ficha";
+        
     }
     
 }
