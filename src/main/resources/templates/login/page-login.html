@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!-->  <!--<![endif]-->
-<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,16 +28,14 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
-<body class="bg-dark">
+<body class="bg-white">
 
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
                 <div class="login-logo">
-                    <a href="index.html">
-                        PMRTI
-                    </a>
+                    <img src="../../images/logo-chile.png"/>
                 </div> 
                 <div class="login-form">
                     <form th:action="@{/page-login}" th:object="${Login}" enctype="multipart/form-data" method="post">
@@ -58,7 +56,7 @@
                             </label>
 
                         </div>
-                        <button type="submit" value="ingresar" th:attr="value=#{ingresar.submit}" class="btn btn-success btn-flat m-b-30 m-t-30">Ingresar</button>
+                        <button type="submit" value="ingresar" th:attr="value=#{ingresar.submit}" class="btn btn-primary btn-flat m-b-30 m-t-30">Ingresar</button>
                         <div class="register-link m-t-15 text-center">
                             <p>¿No tiene cuenta? <a href="#"> Hacer click aquí</a></p>
                         </div>
