@@ -179,9 +179,7 @@ and open the template in the editor.
                                 "estado":"",
                                 "departamento":$("#depart").val()
                              };
-                             alert($("#newRut").val());
-                             alert(usuarioExterno.idNacional)
-                             alert(usuarioExterno);
+                             
                              $.ajax({
                                 type: "POST",
                                 contentType : 'application/json; charset=utf-8',
@@ -190,6 +188,17 @@ and open the template in the editor.
                                 data: JSON.stringify(usuarioExterno), // Note it is important
                                 success :function(result) {
                                  alert(result.respuesta);
+                                 if(result.respuesta == "1"){
+                                    $("#rut").val($("#newRut").val());
+                                    $("#id").val($("#newRut").val());
+                                    from();
+                                 }else if(result.respuesta == "2"){
+                                     alert("error");
+                                     
+                                 }else{
+                                     alert("error Sql");
+                                 }
+                                 
                                }
                             });
             }            
