@@ -20,7 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -71,5 +73,23 @@ public class SolicitudAsigEquipoController {
         model.addAttribute("lisDocum", docDao.findAllWithRelacionForSolicitante(user.getIdNacional(),"SL"));
         
         return "solicitudAsigEqui/listaSoliAsig";
+    }
+    @PostMapping(value = "/crearUser" ,produces = {"application/json"})
+    public @ResponseBody String crear(@RequestBody UsuarioExterno user){
+        //
+        String rest="{\"respuesta\":\"0\"}";
+        try {
+            UsuarioExterno userV = userEctDAO.findOne(user.getIdNacional());
+            if(userV == null){
+                userEctDAO.save(user);
+                 rest="{\"respuesta\":\"1\"}";
+            }else{
+                rest="{\"respuesta\":\"2\"}";
+            }
+            
+        } catch (Exception e) {
+            rest="{\"respuesta\":\"3\"}";
+        }        
+        return rest;
     }
 }

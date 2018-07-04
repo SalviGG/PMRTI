@@ -8,6 +8,9 @@ package com.example.demo.Controller;
 //Import de dependencias
 import com.example.demo.model.entity.TipoEquipo;
 import com.example.demo.model.entity.UsuarioExterno;
+import com.example.demo.model.service.EquipoService;
+import com.example.demo.model.service.EstadoEquipoService;
+import com.example.demo.model.service.GraficDatosService;
 import com.example.demo.model.service.TipoEquipoService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,6 +31,18 @@ import org.springframework.web.bind.support.SessionStatus;
 @RequestMapping("/index")
 public class IndexController {
     
+    @Autowired
+    private TipoEquipoService tipEquiDAO;
+    
+    @Autowired
+    private EquipoService equiDAO;
+    
+    @Autowired
+    private EstadoEquipoService estadoEquiDAO;
+    
+    @Autowired
+    private GraficDatosService Generategrafic;
+    
     @GetMapping("index")
     public String form( HttpServletRequest request){
         
@@ -38,6 +53,21 @@ public class IndexController {
         }
         
         return "index/index";
+    }
+    
+    @GetMapping("index2")
+    public String form2( HttpServletRequest request){
+        
+               
+        return "index/index2";
+    }
+    @GetMapping("index3")
+    public String form3(Model model ){
+       
+        String grafic =Generategrafic.graficColmAndGroup(tipEquiDAO.findAll(), "container", "Prueba", "cantidad");
+        System.out.println(grafic);
+        model.addAttribute("grafic", grafic);
+        return "index/index3";
     }
     
     @GetMapping("")

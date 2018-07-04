@@ -15,7 +15,7 @@ import java.util.Optional;
  */
 public interface UsuarioExternoService {
    public List<UsuarioExterno> findAll();
-   //public void save (UsuarioExternoService tipEqui);
+   public void save (UsuarioExterno user);
    public UsuarioExterno findOne(int id);
    //public void delete(int id);
    public UsuarioExterno findOne(String idNacional);

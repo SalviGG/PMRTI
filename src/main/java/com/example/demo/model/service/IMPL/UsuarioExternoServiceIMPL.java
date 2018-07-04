@@ -147,5 +147,10 @@ public class UsuarioExternoServiceIMPL  implements UsuarioExternoService{
         }
         return user;
     }
+
+    @Override
+    public void save(UsuarioExterno user) {
+       userDAO.save(user);
+    } 
     
 }
