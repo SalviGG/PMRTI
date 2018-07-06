@@ -33,9 +33,7 @@ and open the template in the editor.
     </head>
         
     <body>
-        <div th:if="${session.usuario } != null"> 
-            <span th:text="${session.usuario.departamento }">yonis</span>
-        </div>
+        
         <aside id="left-panel" class="left-panel" th:fragment="aside">
             <nav class="navbar navbar-expand-sm navbar-default">
 
@@ -43,20 +41,20 @@ and open the template in the editor.
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="./">PMRTI</a>
-                    <a class="navbar-brand hidden" href="./"><img src="../../images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="./"><img src="../../images/logo-chile-min.png"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="../../images/logo-chile-min.png"></a>
                 </div>
 
                 <div id="main-menu" class="main-menu collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a th:href="@{index}" > <i class="menu-icon fa fa-dashboard"></i> Menu <span th:text="${session.usuario.departamento}"></span> </a>
+                            <a th:href="@{/index}" > <i class="menu-icon fa fa-dashboard"></i> Menu <span th:text="${session.usuario.departamento}"></span> </a>
                             
                         </li>
                         <h3 th:href="@{index}" class="menu-title">Opciones </h3><!-- /.menu-title -->
                         
                         <li th:href="@{index}" th:if="${session.usuario.departamento}== 'RRHH' or ${session.usuario.departamento}== 'ADM'  " class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Solicitudes Asinaciones</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Solicitudes Asignaciones</a>
                             <ul class="sub-menu children dropdown-menu">
                                 <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/solicitudAsig/creaSolicitud}">Solicilar Asignación de Equipo</a></li>
                                 <li><i class="fa fa-bars"></i><a th:href="@{/solicitudAsig/listaSoliAsig}"> Listar Solicitudes de asignación de equipos</a></li>                                                                
@@ -71,19 +69,19 @@ and open the template in the editor.
                             </ul>
                         </li>
                         <li th:href="@{index}" th:if="${session.usuario.departamento}== 'TI' or ${session.usuario.departamento}== 'ADM' " class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Entregas</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Entregas</a>
                             <ul class="sub-menu children dropdown-menu">                                
                                 <li><i class="fa fa-bars"></i><a th:href="@{/entrega/listarSolicitudEstado}"> Listar Solicitudes pendientes</a></li>                                                                
                             </ul>
                         </li>
                         <li th:href="@{index}" th:if="${session.usuario.departamento}== 'TI' or ${session.usuario.departamento}== 'ADM' " class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Recepción de Equipos</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-inbox"></i>Recepción de Equipos</a>
                             <ul class="sub-menu children dropdown-menu">
                                 <li><i class="fa fa-bars"></i><a th:href="@{/devolucion/listar}"> Listar Equipos Pendiente de Devolución</a></li>                                                                
                             </ul>
                         </li>
                         <li th:href="@{index}" th:if="${session.usuario.departamento}== 'TI' or ${session.usuario.departamento}== 'ADM' " class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Administracion Equipos</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-pencil"></i>Administracion Equipos</a>
                             <ul class="sub-menu children dropdown-menu">
                                 <li><i class="fa fa-puzzle-piece"></i><a th:href="@{/equipo/form}">Crear Equipos</a></li>
                                 <li><i class="fa fa-bars"></i><a th:href="@{/equipo/listar}"> Listar Equipos  </a></li>                                                                
