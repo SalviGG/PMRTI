@@ -825,7 +825,7 @@ textarea {
   width: 100%; }
 
 aside.left-panel {
-  background: #272c33;
+  background: #dcdde2;
   display: table-cell;
   height: 100vh;
   min-height: 100%;
@@ -835,7 +835,7 @@ aside.left-panel {
   transition: width 0.3s ease; }
 
 .navbar {
-  background: #272c33;
+  background: #dcdde2;
   border-radius: 0;
   border: none;
   display: block;
@@ -888,12 +888,12 @@ aside.left-panel {
       width: 100%; }
       .navbar .navbar-nav li.active .menu-icon, .navbar .navbar-nav li:hover .toggle_nav_button:before,
       .navbar .navbar-nav li .toggle_nav_button.nav-open:before {
-        color: #fff !important; }
+        color: #070707 !important; }
       .navbar .navbar-nav li .dropdown-toggle:after {
         display: none; }
       .navbar .navbar-nav li > a {
         background: none !important;
-        color: #c8c9ce !important;
+        color: #070707 !important;
         display: inline-block;
         font-family: 'Open Sans';
         font-size: 14px;
@@ -902,9 +902,9 @@ aside.left-panel {
         position: relative;
         width: 100%; }
         .navbar .navbar-nav li > a:hover, .navbar .navbar-nav li > a:hover .menu-icon {
-          color: #fff !important; }
+          color: #666870!important; }
         .navbar .navbar-nav li > a .menu-icon {
-          color: #8b939b;
+          color: #070707;
           float: left;
           margin-top: 8px;
           width: 55px;
@@ -925,7 +925,7 @@ aside.left-panel {
           line-height: 30px; }
           .navbar .navbar-nav li.menu-item-has-children a:before {
             content: "\f105";
-            color: #c8c9ce;
+            color: #070707;
             font-family: 'Fontawesome';
             font-size: 16px;
             position: absolute;
@@ -940,7 +940,7 @@ aside.left-panel {
           .navbar .navbar-nav li.menu-item-has-children a:hover:before {
             color: #fff; }
         .navbar .navbar-nav li.menu-item-has-children .sub-menu {
-          background: #272c33;
+          background: #dcdde2;
           border: none;
           box-shadow: none;
           overflow-y: hidden;
@@ -948,7 +948,7 @@ aside.left-panel {
           .navbar .navbar-nav li.menu-item-has-children .sub-menu li {
             position: relative; }
           .navbar .navbar-nav li.menu-item-has-children .sub-menu i {
-            color: #c8c9ce;
+            color: #070707;
             float: left;
             padding: 0;
             position: absolute;
@@ -974,7 +974,7 @@ aside.left-panel {
 .navbar .navbar-nav > .active > a,
 .navbar .navbar-nav > .active > a:focus,
 .navbar .navbar-nav > .active > a:hover {
-  color: #d7d9e3 !important; }
+  color: #070707 !important; }
 
 .navbar-nav li span.count {
   background: #a9d86e;
@@ -1125,7 +1125,7 @@ header.fixed-top {
   position: inherit; }
 
 .menutoggle {
-  background: #e74c3c;
+  background: #003ef9;
   border-radius: 50%;
   color: #fff !important;
   cursor: pointer;

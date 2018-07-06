@@ -23,80 +23,46 @@ and open the template in the editor.
                 
             </div>
             <div class="content mt-3">
-
-                <div class="col-xl-12">
+                
+                <div class="col-lg-10">
                     <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Listado Solicitudes de asignación</strong>
+                        </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <h4 class="card-title mb-0">Solcitar asignacion de equipo</h4>
-                                    <div class="small text-muted">formulario</div>
-                                </div>
-                                <!--/.col-->
-                                <!--/.col-->
-                            <div class="col-sm-8 hidden-sm-down">
-                                
-                            </div>
-                                <!--/.col-->
-                                <div class="chart-wrapper mt-4" >
-                                    <!--area de trabajo-->
-                                    
-                                    <div class="col-xl-12" id="listadoUser"  >
-                                        <table>
-                                            <thead>
-                                                <tr>                                                    
-                                                    <th>
-                                                        Nombre solicitante
-                                                    </th>
-                                                    <th>
-                                                        Nombre receptor
-                                                    </th>
-                                                    <th>
-                                                        Tipo de equipo
-                                                    </th>
-                                                    <th>
-                                                        Estado
-                                                    </th>
-                                                    <th>
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th scope="col">RUT Solicitante</th>
+                                  <th scope="col">RUT Receptor</th>
+                                  <th scope="col">Tipo de Equipo</th>
+                                  <th scope="col">Estado</th>
+                                  <th scope="col">Detalle</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr th:each="docRel : ${lisDocum}">
+                                    <td th:text="${docRel.solicitante.idNacional}">
                                                         
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr th:each="docRel : ${lisDocum}">
-                                                    
-                                                    <td th:text="${docRel.solicitante.idNacional}">
+                                    </td>
+                                    <td th:text="${docRel.receptor.idNacional}">
                                                         
-                                                    </td>
-                                                    <td th:text="${docRel.receptor.idNacional}">
+                                    </td>
+                                    <td th:text="${docRel.doc.tipoEquipo.nombre}">
+                                                       
+                                    </td>
+                                    <td th:text="${docRel.doc.estado.descEstado}">
                                                         
-                                                    </td>
-                                                    <td th:text="${docRel.doc.tipoEquipo.nombre}">
-                                                        
-                                                    </td>
-                                                    <td th:text="${docRel.doc.estado.descEstado}">
-                                                        
-                                                    </td>
-                                                    <td >
-                                                        <a th:href="'/document/ficha/'+${docRel.doc.id}" ><input class="btn btn-primary" type="button" value="Detalle"/></a>
-                                                    </td>
-                                                    
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="col-xl-12" id="listadoUser" >
-                                        
-                                    </div>
-                                </div>
-                                <!--/.col-->
-                            </div><!--/.row-->
-
+                                    </td>
+                                    <td >
+                                        <a th:href="'/document/ficha/'+${docRel.doc.id}" ><input class="btn btn-primary" type="button" value="Detalle"/></a>
+                                    </td>
+                                </tr>
+                              </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-
             </div>
             
         </div>

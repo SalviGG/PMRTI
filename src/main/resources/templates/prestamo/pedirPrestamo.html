@@ -1,98 +1,73 @@
 <html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> 
-    
+
     <head th:include="plantilla/fragmentos :: head">
-        
+
     </head>
     <body>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        
+
         <aside id="left-panel" class="left-panel" th:include="plantilla/fragmentos :: aside">
-            
+
         </aside>
         <div id="right-panel" class="right-panel">
             <header id="header" class="header" th:include="plantilla/fragmentos :: header">
-                
+
             </header>
             <div class="breadcrumbs" th:include="plantilla/fragmentos :: breadcrumds" >
-                
+
             </div>
+
             <div class="content mt-3">
-
-                <div class="col-xl-12">
+                <div class="col-lg-6">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <h4 class="card-title mb-0">Solcitar asignacion de equipo</h4>
-                                    <div class="small text-muted">formulario</div>
+                        <div class="card-header">
+                            <strong>Solicitar prestamo de equipo</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <form th:action="@{/prestamo/pedirPrestamo}" 
+                                  th:object="${Documento}" 
+                                  method="post" 
+                                  enctype="multipart/form-data" 
+                                  class="form-horizontal">   
+                                <div class="form-group">
+                                    <label  for="testOrder" class="control-label">Tipo de equipo</label>
+                                    <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
+                                        <option value="">Tipo Equipo</option>
+                                        <option th:each="tipoEqui : ${listTipo}"
+                                                th:value="${tipoEqui.id_tipo_equipo}"
+                                                th:text="${tipoEqui.nombre}"></option>
+                                    </select>
                                 </div>
-                                <!--/.col-->
-                                <!--/.col-->
-                            <div class="col-sm-8 hidden-sm-down">
-                                
-                            </div>
-                                <!--/.col-->
-                                <div class="chart-wrapper mt-4" >
-                                    <!--area de trabajo-->
-                                    <div class="col-xl-12" id="principal" >
-                                    <form th:action="@{/prestamo/pedirPrestamo}" 
-                                          th:object="${Documento}" 
-                                          method="post" 
-                                          enctype="multipart/form-data" 
-                                          class="form-horizontal">   
-                                                                               
-                                        
-                                        <div class="form-group">
-                                            <label  for="testOrder" class="control-label">Tipo de equipo</label>
-                                            <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
-                                                <option value="">Tipo Equipo</option>
-                                                <option th:each="tipoEqui : ${listTipo}"
-                                                        th:value="${tipoEqui.id_tipo_equipo}"
-                                                        th:text="${tipoEqui.nombre}"></option>
-                                            </select>
-                                        </div>
-                                        
-                                                                
-                                        <input type="submit" value="enviar"/>
-                                    </form>
-                                    </div>
-                                    
-                                    <div class="col-xl-12" id="listadoUser" >
-                                        
-                                    </div>
-                                </div>
-                                <!--/.col-->
-                            </div><!--/.row-->
-
+                                <input class="btn btn-primary" type="submit" value="enviar"/>
+                            </form>
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            
-        </div>
-        <footer style="display: none" th:include="plantilla/fragmentos :: footer">
-            
-        </footer>
-                      
-        <script>
-            function sel(rut,id){
-                
-                $("#rut").val(rut);
-                $("#id").val(rut);
-                from();
-            }
-            function allUser(){
-                $("#principal").css("display","none");
-                $("#listadoUser").css("display","block");
-            }
-            function from(){
-                $("#listadoUser").css("display","none");
-                $("#principal").css("display","block");
-            }
-            
-        </script>
-       
+
+
+
+            <footer style="display: none" th:include="plantilla/fragmentos :: footer">
+
+            </footer>
+
+            <script>
+                function sel(rut, id) {
+
+                    $("#rut").val(rut);
+                    $("#id").val(rut);
+                    from();
+                }
+                function allUser() {
+                    $("#principal").css("display", "none");
+                    $("#listadoUser").css("display", "block");
+                }
+                function from() {
+                    $("#listadoUser").css("display", "none");
+                    $("#principal").css("display", "block");
+                }
+
+            </script>
+
     </body>
 </html>

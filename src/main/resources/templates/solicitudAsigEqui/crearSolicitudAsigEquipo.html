@@ -5,227 +5,210 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> 
-    
+
     <head th:include="plantilla/fragmentos :: head">
-        
+
     </head>
     <body>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        
+
         <aside id="left-panel" class="left-panel" th:include="plantilla/fragmentos :: aside">
-            
+
         </aside>
         <div id="right-panel" class="right-panel">
             <header id="header" class="header" th:include="plantilla/fragmentos :: header">
-                
+
             </header>
             <div class="breadcrumbs" th:include="plantilla/fragmentos :: breadcrumds" >
-                
+
             </div>
             <div class="content mt-3">
-
-                <div class="col-xl-12">
+                <div class="col-lg-6">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <h4 class="card-title mb-0">Solcitar asignacion de equipo</h4>
-                                    <div class="small text-muted">formulario</div>
-                                </div>
-                                <!--/.col-->
-                                <!--/.col-->
-                            <div class="col-sm-8 hidden-sm-down">
-                                
-                            </div>
-                                <!--/.col-->
-                                <div class="chart-wrapper mt-4" >
-                                    <!--area de trabajo-->
-                                    <div class="col-xl-12" id="principal" >
-                                    <form th:action="@{/solicitudAsig/creaSolicitud}" 
-                                          th:object="${Documento}" 
-                                          method="post" 
-                                          enctype="multipart/form-data" 
-                                          class="form-horizontal">   
-                                        
-                                        <div class="form-group">
-                                            <label  for="testOrder" class="control-label">rut del receptor </label>
-                                            <div>
-                                                <input th:field="*{rutReceptor}" id="id" type="hidden" />
-                                                <input type="text" id="rut" disabled="false" /> 
-                                                <input class="btn btn-primary"  onclick="allUser();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
-                                                <input class="btn btn-primary" onclick="crearUser();" type="button" value="crear receptor transitorio " />
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label  for="testOrder" class="control-label">Tipo de equipo</label>
-                                            <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
-                                                <option value="">Tipo Equipo</option>
-                                                <option th:each="tipoEqui : ${listTipo}"
-                                                        th:value="${tipoEqui.id_tipo_equipo}"
-                                                        th:text="${tipoEqui.nombre}"></option>
-                                            </select>
-                                        </div>
-                                        
-                                                                
-                                        <input type="submit" value="enviar"/>
-                                    </form>
-                                    </div>
-                                    <div class="col-xl-12" id="listadoUser" style="display: none;" >
-                                        <input type="button" value="volver" onclick="from()" class="btn btn-primary"/>
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Seleccionar
-                                                    </th>
-                                                    <th>
-                                                        Rut
-                                                    </th>
-                                                    <th>
-                                                        Nombre
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr th:each="user : ${listUsers}">
-                                                    <td>
-                                                        <input type="button" class="btn btn-primary" value="selecionar" th:onclick="'sel(\''+${user.idNacional}+'\',\''+${user.idUsuario}+'\');'" />
-                                                    </td>
-                                                    <td th:text="${user.idNacional}">
-                                                        
-                                                    </td>
-                                                    <td th:text="${user.name}">
-                                                        
-                                                    </td>                                                    
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="col-xl-12" id="crearUser" style="display: none;"  >
-                                        <div class="form-group">
-                                            <label  for="testOrder" class="control-label">RUT </label>
-                                            <div>                                                
-                                                <input class="form-control"  type="text" id="newRut"  />                                                 
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label  for="testOrder" class="control-label">Nombre </label>
-                                            <div>                                                
-                                                <input class="form-control"  type="text" id="Nombre"  />                                                 
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label  for="testOrder" class="control-label">Apellidos </label>
-                                            <div>                                                
-                                                <input class="form-control"  type="text" id="lastName"  />                                                 
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label  for="testOrder" class="control-label">Email </label>
-                                            <div>                                                
-                                                <input class="form-control" type="text" id="Email"  />                                                 
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label  for="testOrder" class="control-label">Departamento </label>
-                                            <div>                                                
-                                                <select id="depart" class="form-control">
-                                                    <option value="RH">
-                                                        recursos humanos
-                                                    </option>
-                                                    <option value="TI">
-                                                        informatica
-                                                    </option>
-                                                    <option value="FIN">
-                                                        Finanzas
-                                                    </option>
-                                                    <option value="etc">
-                                                        ECT
-                                                    </option>
-                                                </select>                                                 
-                                            </div>
-                                        </div>
-                                        <input type="button" value="Crear" onclick="enviarCrearUser();"  class="btn btn-primary"/>
-                                        <input type="button" value="volver" onclick="from()" class="btn btn-primary"/>
-                                    </div>
-                                </div>
-                                <!--/.col-->
-                            </div><!--/.row-->
-
+                        <div class="card-header">
+                            <strong>Solicitar asignación de equipo</strong>
                         </div>
+                        <div class="card-body card-block">
+                            <form th:action="@{/solicitudAsig/creaSolicitud}" 
+                                  th:object="${Documento}" 
+                                  method="post" 
+                                  enctype="multipart/form-data" 
+                                  class="form-horizontal">
+
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label  for="testOrder" class="control-label">RUT del receptor </label></div>
+                                    <div class="col-12 col-md-9">
+                                        <input th:field="*{rutReceptor}" id="id" type="hidden" />
+                                        <input type="text" id="rut" disabled="false" /> 
+                                        <input class="btn btn-primary"  onclick="allUser();" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" value="Buscar" />
+                                    </div>  
+                                </div>
+                                <div class="row form-group">    
+                                    <div class="col col-md-3"><input class="btn btn-primary" onclick="crearUser();" type="button" value="Crear receptor temporal " /></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label  for="testOrder" class="control-label">Tipo de equipo</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <select th:field="*{tipoEquipo}" class="form-control"  id="testOrder" name="testOrder">
+                                            <option value="">Tipo Equipo</option>
+                                            <option th:each="tipoEqui : ${listTipo}"
+                                                    th:value="${tipoEqui.id_tipo_equipo}"
+                                                    th:text="${tipoEqui.nombre}"></option>
+                                        </select>
+                                    </div>
+                                </div> 
+                                <input class="btn btn-primary" type="submit" value="Enviar"/>
+                            </form>
+                            <br/>
+                            <div class="col-xl-12" id="listadoUser" style="display: none;" >
+                                <input type="button" value="volver" onclick="from()" class="btn btn-primary"/>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Seleccionar
+                                            </th>
+                                            <th>
+                                                Rut
+                                            </th>
+                                            <th>
+                                                Nombre
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="user : ${listUsers}">
+                                            <td>
+                                                <input type="button" class="btn btn-primary" value="selecionar" th:onclick="'sel(\''+${user.idNacional}+'\',\''+${user.idUsuario}+'\');'" />
+                                            </td>
+                                            <td th:text="${user.idNacional}">
+
+                                            </td>
+                                            <td th:text="${user.name}">
+
+                                            </td>                                                    
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-xl-12" id="crearUser" style="display: none;"  >
+                                <div class="form-group">
+                                    <label  for="testOrder" class="control-label">RUT </label>
+                                    <div>                                                
+                                        <input class="form-control"  type="text" id="newRut"  />                                                 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label  for="testOrder" class="control-label">Nombre </label>
+                                    <div>                                                
+                                        <input class="form-control"  type="text" id="Nombre"  />                                                 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label  for="testOrder" class="control-label">Apellidos </label>
+                                    <div>                                                
+                                        <input class="form-control"  type="text" id="lastName"  />                                                 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label  for="testOrder" class="control-label">Email </label>
+                                    <div>                                                
+                                        <input class="form-control" type="text" id="Email"  />                                                 
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label  for="testOrder" class="control-label">Departamento </label>
+                                    <div>                                                
+                                        <select id="depart" class="form-control">
+                                            <option value="RH">
+                                                recursos humanos
+                                            </option>
+                                            <option value="TI">
+                                                informatica
+                                            </option>
+                                            <option value="FIN">
+                                                Finanzas
+                                            </option>
+                                            <option value="etc">
+                                                Otros
+                                            </option>
+                                        </select>                                                 
+                                    </div>
+                                </div>
+                                <input type="button" value="Crear" onclick="enviarCrearUser();"  class="btn btn-primary"/>
+                                <input type="button" value="volver" onclick="from()" class="btn btn-primary"/>
+                            </div>
+                        </div>  
                     </div>
                 </div>
-
-
             </div>
-            
+
         </div>
         <footer style="display: none" th:include="plantilla/fragmentos :: footer">
-            
+
         </footer>
-                      
+
         <script>
-            function enviarCrearUser(){
-               
-                 var usuarioExterno = {   "idUsuario":"",
-                                "email" : $("#Email").val(),
-                                "passwer":"",
-                                "lastName" :$("#lastName").val(),
-                                "name":$("#Nombre").val(),
-                                "birthdate":"",                    
-                                "idNacional":$("#newRut").val(),
-                                "estado":"",
-                                "departamento":$("#depart").val()
-                             };
-                             
-                             $.ajax({
-                                type: "POST",
-                                contentType : 'application/json; charset=utf-8',
-                                dataType : 'json',
-                                url: "/solicitudAsig/crearUser",
-                                data: JSON.stringify(usuarioExterno), // Note it is important
-                                success :function(result) {
-                                 alert(result.respuesta);
-                                 if(result.respuesta == "1"){
-                                    $("#rut").val($("#newRut").val());
-                                    $("#id").val($("#newRut").val());
-                                    from();
-                                 }else if(result.respuesta == "2"){
-                                     alert("error");
-                                     
-                                 }else{
-                                     alert("error Sql");
-                                 }
-                                 
-                               }
-                            });
-            }            
-            function crearUser(){                
-                $("#principal").css("display","none");
-                $("#listadoUser").css("display","none");
-                $("#crearUser").css("display","block");                
+            function enviarCrearUser() {
+
+                var usuarioExterno = {"idUsuario": "",
+                    "email": $("#Email").val(),
+                    "passwer": "",
+                    "lastName": $("#lastName").val(),
+                    "name": $("#Nombre").val(),
+                    "birthdate": "",
+                    "idNacional": $("#newRut").val(),
+                    "estado": "",
+                    "departamento": $("#depart").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    url: "/solicitudAsig/crearUser",
+                    data: JSON.stringify(usuarioExterno), // Note it is important
+                    success: function (result) {
+                        alert(result.respuesta);
+                        if (result.respuesta == "1") {
+                            $("#rut").val($("#newRut").val());
+                            $("#id").val($("#newRut").val());
+                            from();
+                        } else if (result.respuesta == "2") {
+                            alert("error");
+
+                        } else {
+                            alert("error Sql");
+                        }
+
+                    }
+                });
             }
-            function sel(rut,id){
-                
+            function crearUser() {
+                $("#principal").css("display", "none");
+                $("#listadoUser").css("display", "none");
+                $("#crearUser").css("display", "block");
+            }
+            function sel(rut, id) {
+
                 $("#rut").val(rut);
                 $("#id").val(rut);
                 from();
             }
-            function allUser(){
-                $("#principal").css("display","none");
-                $("#crearUser").css("display","none");
-                $("#listadoUser").css("display","block");
-                
+            function allUser() {
+                $("#principal").css("display", "none");
+                $("#crearUser").css("display", "none");
+                $("#listadoUser").css("display", "block");
+
             }
-            function from(){
-                $("#listadoUser").css("display","none");
-                $("#crearUser").css("display","none");
-                $("#principal").css("display","block");
+            function from() {
+                $("#listadoUser").css("display", "none");
+                $("#crearUser").css("display", "none");
+                $("#principal").css("display", "block");
             }
-            
+
         </script>
-       
+
     </body>
 </html>
