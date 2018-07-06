@@ -15,5 +15,5 @@ import java.util.List;
 public interface GraficDatosService {
     
     public String graficColmAndGroup(List<TipoEquipo> listEqui,String idContainer,String title,String titleLeft);
-    
+    public String graficSereieforColum(List<TipoEquipo>listEqui);
 }

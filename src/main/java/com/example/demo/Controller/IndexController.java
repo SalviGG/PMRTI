@@ -44,14 +44,16 @@ public class IndexController {
     private GraficDatosService Generategrafic;
     
     @GetMapping("index")
-    public String form( HttpServletRequest request){
+    public String form( HttpServletRequest request,Model model){
         
         UsuarioExterno user = (UsuarioExterno)request.getSession().getAttribute("usuario");
         
         if (user == null){
          return"redirect:/";
         }
-        
+        String grafic =Generategrafic.graficColmAndGroup(tipEquiDAO.findAll(), "grafic", "Prueba", "cantidad");
+        System.out.println(grafic);
+        model.addAttribute("grafic", grafic);
         return "index/index";
     }
     
@@ -65,19 +67,22 @@ public class IndexController {
     public String form3(Model model ){
        
         String grafic =Generategrafic.graficColmAndGroup(tipEquiDAO.findAll(), "container", "Prueba", "cantidad");
-        System.out.println(grafic);
+        
         model.addAttribute("grafic", grafic);
         return "index/index3";
     }
     
     @GetMapping("")
-    public String index2(HttpSession request){
+    public String index2(HttpSession request,Model model){
         
         UsuarioExterno user = (UsuarioExterno)request.getAttribute("usuario");
         
         if (user == null){
             return"redirect:/";
         }
+        String grafic =Generategrafic.graficColmAndGroup(tipEquiDAO.findAll(), "grafic", "Prueba", "cantidad");
+        System.out.println(grafic);
+        model.addAttribute("grafic", grafic);
         System.out.println(user.getName());
         return "index/index";
     }

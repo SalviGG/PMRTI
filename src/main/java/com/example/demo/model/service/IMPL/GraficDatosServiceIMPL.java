@@ -94,4 +94,49 @@ public class GraficDatosServiceIMPL implements GraficDatosService{
         return graficHead;
     }
     
+    @Override
+    public String graficSereieforColum(List<TipoEquipo>listEqui) {
+        
+        String series = "{\"serie\":[";
+        int count = 0;
+        String seriesDisponible ="{\"name\": \"disponible\",\"data\": [" ;
+        String seriesNoDisponible="{\"name\": \"no disponible\",\"data\": [";
+        String seriesPrestados="{\"name\": \"prestados\",\"data\": [";
+        String seriesAsignados="{\"name\": \"asignados\",\"data\": [";
+        String seriesEnMantenimiento="{\"name\": \"En Mantenimiento\",\"data\": [";
+        
+        
+        for (TipoEquipo tipoEquipo : listEqui) {
+            long disponible=equipoDAO.countForTypeAndForGroup(tipoEquipo, 1);
+            long noDisponible=equipoDAO.countForTypeAndForGroup(tipoEquipo, 3);
+            long pretados=equipoDAO.countForTypeAndForStado(tipoEquipo, estEquipoDAO.findOne(3).orElse(null));
+            long asignados=equipoDAO.countForTypeAndForStado(tipoEquipo, estEquipoDAO.findOne(4).orElse(null));
+            long enMantenimiento=equipoDAO.countForTypeAndForStado(tipoEquipo, estEquipoDAO.findOne(2).orElse(null));
+            
+            if(count>0){
+                               
+                seriesDisponible +="," ;
+                seriesNoDisponible+=",";
+                seriesPrestados+=",";
+                seriesAsignados+=",";
+                seriesEnMantenimiento+=",";
+            }
+            
+                seriesDisponible +=""+disponible+"" ;
+                seriesNoDisponible+=""+noDisponible+"";
+                seriesPrestados+=""+pretados+"";
+                seriesAsignados+=""+asignados+""; 
+                seriesEnMantenimiento+=""+enMantenimiento+"";
+            count++;
+        }                    
+        seriesDisponible +="],\"stack\": \"Dis\"}" ;
+        seriesNoDisponible+="],\"stack\": \"Dis\"}";
+        seriesPrestados+="],\"stack\": \"det\"}";
+        seriesAsignados+="],\"stack\": \"det\"}";
+        seriesEnMantenimiento+="],\"stack\": \"man\"}";
+        series += seriesDisponible+","+seriesNoDisponible+","+seriesPrestados+","+seriesAsignados+","+seriesEnMantenimiento+"]}";
+        System.out.println(series);
+        return series;
+    }
+    
 }

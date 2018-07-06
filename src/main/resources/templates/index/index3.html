@@ -9,6 +9,7 @@
 		</style>
 	</head>
 	<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -16,13 +17,43 @@
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
     
 </div>
-
+<input type="button" onclick="modificar(); refresGrafic();" value="cambio"/>
 
 
 		<script th:inline="javascript">
 
-[(${grafic})];
+var char; 
+document.addEventListener('DOMContentLoaded',function(){
+char = [(${grafic})];
+setTimeout(function(){refresGrafic();}, 5000);
+});
 
+function modificar(){
+    
+    char.series[0].setData([2,4,5],true);
+    
+}
+
+function refresGrafic(){
+    var prueba = {};
+$.ajax({
+    type: "POST",
+    contentType : 'application/json; charset=utf-8',
+    dataType : 'json',
+    url: "/equipo/grafic",
+    data: JSON.stringify(prueba), // Note it is important
+    success :function(result) {
+     
+     for (var i = 0; i < result.serie.length; i++) {
+         char.series[i].setData(result.serie[i].data,true);
+         
+    }
+    setTimeout(function(){refresGrafic();}, 3000);
+   }
+});
+    
+    
+} 
 		</script>
 	</body>
 </html>
