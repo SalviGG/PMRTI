@@ -7,8 +7,11 @@ package com.example.demo.Controller;
 
 
 import com.example.demo.model.entity.Equipo;
+import com.example.demo.model.entity.EstadoEquipo;
 import com.example.demo.model.entity.TipoEquipo;
 import com.example.demo.model.service.EquipoService;
+import com.example.demo.model.service.EstadoEquipoService;
+import com.example.demo.model.service.GraficDatosService;
 import com.example.demo.model.service.TipoEquipoService;
 import java.util.List;
 import javax.validation.Valid;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
 
@@ -35,9 +39,14 @@ public class EquipoController {
     @Autowired 
     private EquipoService equipoService;
     
+    @Autowired
+    private EstadoEquipoService estadoEquipoService;
     
     @Autowired
     private TipoEquipoService tipoEquiServ;
+    
+    @Autowired 
+    private GraficDatosService grafic;
     
     @GetMapping("/listar")
     public String listado(Model model){
@@ -53,20 +62,21 @@ public class EquipoController {
         Equipo Equi = new Equipo();
         
         List<TipoEquipo> lisTipoEqui = tipoEquiServ.findAll();
+        
         model.addAttribute("Equipo", Equi);
         model.addAttribute("listTipoEqui", lisTipoEqui);
+        List<EstadoEquipo> lisEstado = estadoEquipoService.findAll(); 
+        model.addAttribute("listEstado", lisEstado);
         
         return "equipo/form";
     }
     
     @PostMapping("/form")
-    public String guardar(@Valid Equipo equi ,SessionStatus status){
-            
-        equi.setEstado("P");
+    public String guardar(@Valid Equipo equi ,SessionStatus status){        
         equipoService.save(equi);
         
         status.setComplete();
-        return "redirect:listar";
+        return "redirect:/equipo/listar";
     }
     
     @GetMapping("/eliminar/{id}")
@@ -87,8 +97,16 @@ public class EquipoController {
             List<TipoEquipo> lisTipoEqui = tipoEquiServ.findAll();
             model.addAttribute("Equipo", equi);
             model.addAttribute("listTipoEqui", lisTipoEqui);
+            List<EstadoEquipo> lisEstado = estadoEquipoService.findAll(); 
+            model.addAttribute("listEstado", lisEstado);
             return "equipo/editar/from";
         }
         return "redirect:listar";
     }
+     @PostMapping(value = "/grafic" ,produces = {"application/json"})
+    public @ResponseBody String crear(){    
+         System.out.println(grafic.graficSereieforColum(tipoEquiServ.findAll()));
+        return grafic.graficSereieforColum(tipoEquiServ.findAll());
+    }
+    
 }

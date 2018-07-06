@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"> 
+    
+    <head th:include="plantilla/fragmentos :: head">
+        
+    </head>
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <aside id="left-panel" class="left-panel" th:include="plantilla/fragmentos :: aside">
+            
+        </aside>
+        <div id="right-panel" class="right-panel">
+            <header id="header" class="header" th:include="plantilla/fragmentos :: header">
+                
+            </header>
+            <div class="breadcrumbs" th:include="plantilla/fragmentos :: breadcrumds" >
+                
+            </div>
+            <div class="content mt-3">
+
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h4 class="card-title mb-0">Solcitar asignacion de equipo</h4>
+                                    <div class="small text-muted">formulario</div>
+                                </div>
+                                <!--/.col-->
+                                <!--/.col-->
+                            <div class="col-sm-8 hidden-sm-down">
+                                
+                            </div>
+                                <!--/.col-->
+                                <div class="chart-wrapper mt-4" >
+                                    <!--area de trabajo-->
+                                    
+                                    <div class="col-xl-12" id="listadoUser"  >
+                                        <table>
+                                            <thead>
+                                                <tr>                                                    
+                                                    <th>
+                                                        Nombre solicitante
+                                                    </th>
+                                                    <th>
+                                                        Nombre receptor
+                                                    </th>
+                                                    <th>
+                                                        Tipo de equipo
+                                                    </th>
+                                                    <th>
+                                                        Estado
+                                                    </th>
+                                                    <th>
+                                                        Tipo
+                                                    </th>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="docRel : ${lisDocum}">
+                                                    
+                                                    <td th:text="${docRel.solicitante.idNacional}">
+                                                        
+                                                    </td>
+                                                    <td th:text="${docRel.receptor.idNacional}">
+                                                        
+                                                    </td>
+                                                    <td th:text="${docRel.doc.tipoEquipo.nombre}">
+                                                        
+                                                    </td>
+                                                    <td th:text="${docRel.doc.estado.descEstado}">
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <span th:if="${docRel.doc.tipoDocumento}=='PR'">
+                                                            Prestamo
+                                                        </span>
+                                                        <span th:if="${docRel.doc.tipoDocumento}=='SL'">
+                                                            Asignacion
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <form th:action="${'/devolucion/recepcion/'+docRel.doc.id}"> 
+                                                            <button class="btn btn-primary" type="submit">Entregar</button>
+                                                        </form>
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <form th:action="${'/devolucion/recepcion/'+docRel.doc.id}"> 
+                                                            <button class="btn btn-primary" type="submit">Rechazar</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-xl-12" id="listadoUser" >
+                                        
+                                    </div>
+                                </div>
+                                <!--/.col-->
+                            </div><!--/.row-->
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+        </div>
+        <footer style="display: none" th:include="plantilla/fragmentos :: footer">
+            
+        </footer>
+                      
+        <script>
+            function sel(rut,id){
+                
+                $("#rut").val(rut);
+                $("#id").val(rut);
+                from();
+            }
+            function allUser(){
+                $("#principal").css("display","none");
+                $("#listadoUser").css("display","block");
+            }
+            function from(){
+                $("#listadoUser").css("display","none");
+                $("#principal").css("display","block");
+            }
+            
+        </script>
+       
+    </body>
+</html>
+

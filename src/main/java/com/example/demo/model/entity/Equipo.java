@@ -41,7 +41,9 @@ public class Equipo implements Serializable{
     
     private String modelo;
     
-    private String estado;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estado")
+    private EstadoEquipo estado;
 
     public int getId_equipo() {
         return id_equipo;
@@ -93,11 +95,11 @@ public class Equipo implements Serializable{
         this.modelo = modelo;
     }
 
-    public String getEstado() {
+    public EstadoEquipo getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoEquipo estado) {
         this.estado = estado;
     }
     

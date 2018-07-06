@@ -5,8 +5,13 @@
  */
 package com.example.demo.Controller;
 
-import com.example.demo.model.entity.TipoEquipo;
-import com.example.demo.model.service.TipoEquipoService;
+
+import com.example.demo.model.entity.UsuarioExterno;
+
+import com.example.demo.model.service.UsuarioExternoService;
+import com.example.demo.objetos.Login;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,14 +29,42 @@ import org.springframework.web.bind.support.SessionStatus;
 @RequestMapping("/")
 public class LoginController {
     
+    @Autowired
+    private UsuarioExternoService usuarioExternoService;
+    
+    
+    @GetMapping("prueba")
+    public String prueba(Model model){
+        model.addAttribute("usuario", null);
+        return "plantilla/fragmentos";
+    }
+      
     @GetMapping("")
-    public String login(){
-        return "login/page-login";
+    public String login(Model model){
+        
+        model.addAttribute("Login", new Login());
+        
+        return "/login/page-login";
     }
     
-    @PostMapping("page-login")
-    public String ingresar(){
+    @PostMapping("/page-login")
+    public String ingresar(@Valid Login login ,SessionStatus status ,Model model,HttpSession request){
+        
+        UsuarioExterno user = usuarioExternoService.findOne(login.getUser(), login.getPass());
+        
+        if(user == null){
+            model.addAttribute("Login", new Login());
+            return "redirect:/";
+        }    
+        
+        request.setAttribute("usuario", user);
+        
         return "redirect:/index";
     }
-    
+    @GetMapping("/logout")
+    private String  logout(HttpSession session){
+        
+        session.invalidate();
+        return "redirect:/index";
+    }
 }
